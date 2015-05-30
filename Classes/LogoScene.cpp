@@ -8,6 +8,7 @@
 
 #include "LogoScene.h"
 #include "Common.h"
+#include "LoginScene.h"
 
 #include <vector>
 
@@ -25,11 +26,7 @@ Scene* LogoScene::createScene()
     return scene;
 }
 
-inline void scale2size(cocos2d::Sprite* sprite, const cocos2d::Size& size)
-{
-    sprite->setScaleX(size.width* 1.f/sprite->getContentSize().width);
-    sprite->setScaleY(size.height*1.f/sprite->getContentSize().height);
-}
+
 
 bool LogoScene::init()
 {
@@ -42,7 +39,7 @@ bool LogoScene::init()
 
     // bg
     auto spbg = Sprite::create("images/white_bg.png");
-    scale2size(spbg, windowsSize);
+    mcd::scale2size(spbg, windowsSize);
     spbg->setPosition(center);
     this->addChild(spbg, 0);
 
@@ -54,7 +51,7 @@ bool LogoScene::init()
         CCLOG("%s %f", pair.first.c_str(), pair.second);
         auto sp = Sprite::create(pair.first);
         sp->setPosition(center);
-        scale2size(sp, windowsSize);
+        mcd::scale2size(sp, windowsSize);
         sp->setOpacity(0);
         this->addChild(sp, 1);
         auto actWait = DelayTime::create(delaySum);
@@ -70,6 +67,7 @@ bool LogoScene::init()
         sp->runAction(seq);
     }
 
+    scheduleOnce([&delaySum](float){Director::getInstance()->replaceScene(LoginScene::createScene());},delaySum, "login_scene");
 
     return true;
 }
