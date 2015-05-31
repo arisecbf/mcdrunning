@@ -10,6 +10,7 @@
 #include "Common.h"
 #include "SimpleAudioEngine.h"
 #include "RoleSelectScene.h"
+#include "GameScene.h"
 
 USING_NS_CC;
 
@@ -64,8 +65,13 @@ void StartScene::onButtonClick(int tag)
 
     switch (tag) {
         case BTN_ROLE:
-            turnOut(config::default_turn_out_time);
+            turnOut();
             scheduleOnce([](float){Director::getInstance()->replaceScene(RoleSelectScene::createScene());}, config::default_turn_out_time, "ds");
+            break;
+
+        case BTN_PLAY:
+            turnOut();
+            scheduleOnce([](float){Director::getInstance()->replaceScene(GameScene::create());}, config::default_turn_out_time, "ds2");
             break;
 
         default:
