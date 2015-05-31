@@ -7,6 +7,7 @@
 //
 
 #include "McdLayer.h"
+#include "SimpleAudioEngine.h"
 USING_NS_CC;
 
 ui::Button* McdLayer::decorateButton(const config::Btn_info& btnInfo , int tag)
@@ -30,6 +31,7 @@ void McdLayer::touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType type
     if (type != cocos2d::ui::Widget::TouchEventType::ENDED) {
         return;
     }
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/click2.mp3");
     this->onButtonClick(tag);
 }
 

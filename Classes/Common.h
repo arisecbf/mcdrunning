@@ -63,12 +63,34 @@ namespace config
     const std::string start_role = "images/role_0.png";
     const cocos2d::Vec2 start_img_role = {0.5f, 0.5f};
 
+    // role select
+    const Btn_info role_btn_select = {"images/role_btn_select.png", "images/role_btn_select.png", {0.5f, 0.2f}, 2.f};
+    const Btn_info role_btn_prev = {"images/role_btn_prev.png", "images/role_btn_prev.png", {0.2f,0.2f}, 1.f};
+    const Btn_info role_btn_next = {"images/role_btn_next.png", "images/role_btn_next.png", {0.8f, 0.2f}, 1.f};
+    const cocos2d::Vec2 role_pos_middle = {0.5f, 0.5f};
+    const cocos2d::Vec2 role_pos_step = {0.17f, 0.f};
+    const float role_scale_step = 0.8f;
+    const std::vector<std::string> role_vec_imgs = {
+        "images/roles/0.png",
+        "images/roles/1.png",
+        "images/roles/2.png",
+        "images/roles/3.png",
+        "images/roles/4.png",
+        "images/roles/5.png"};
+    const float role_img_scale = 1.f;
+    const float role_interval = 0.3f;
 }
 
 inline cocos2d::Vec2 operator*(const cocos2d::Vec2& v2, const cocos2d::Size& size)
 {
     return {v2.x * size.width, v2.y * size.height};
 }
+
+inline cocos2d::Vec2 operator*(const cocos2d::Size& size, const cocos2d::Vec2& v2)
+{
+    return v2*size;
+}
+
 
 namespace mcd {
     inline void scale2size(cocos2d::Sprite* sprite, const cocos2d::Size& size)
