@@ -22,12 +22,16 @@ namespace config
         std::string img;
         std::string img_p;
         cocos2d::Vec2 pos;
-        Btn_info(const std::string& img0, const std::string& img1, const cocos2d::Vec2& pos){
+        float scale;
+        Btn_info(const std::string& img0, const std::string& img1, const cocos2d::Vec2& pos, float scale){
             this->img = img0;
             this->img_p = img1;
             this->pos = pos;
+            this->scale = scale;
         }
     };
+    // common
+    const std::string white_bg = "images/white_bg.png";
     // Brand
     const float default_logo_time = 2.3f;
     const std::vector<std::pair<std::string, float> > logoImages = {
@@ -39,21 +43,36 @@ namespace config
     // login
     const std::string login_bg = "images/login_bg.jpg";
     const std::string bgm_default = "sound/bgm_default.mp3";
-    const Btn_info login_btn_qq = {"images/login_btn_qq.png", "images/login_btn_qq_p.png", {0.5f, 0.2f}};
-    const Btn_info login_btn_guest {"images/login_btn_guest.png", "images/login_btn_guest_p.png", {0.5f, 0.1f}};
+    const Btn_info login_btn_qq = {"images/login_btn_qq.png", "images/login_btn_qq_p.png", {0.5f, 0.2f}, 1.f};
+    const Btn_info login_btn_guest {"images/login_btn_guest.png", "images/login_btn_guest_p.png", {0.5f, 0.1f}, 1.f};
+
+    // start
+    const float start_scale = 2.f;
+    const std::string start_bg = "images/start_bg.png";
+    const Btn_info start_btn_coin = {"images/coin_bg.png", "images/coin_bg.png", {0.75f, 0.9f}, start_scale};
+    const Btn_info start_btn_head = {"images/start_btn_head.png", "images/start_btn_head.png", {0.7f, 0.7f}, start_scale};
+    const Btn_info start_btn_role = {"images/start_btn_role.png", "images/start_btn_role.png", {0.3f, 0.3f}, start_scale};
+    const Btn_info start_btn_asset = {"images/start_btn_asset.png", "images/start_btn_asset.png", {0.5f, 0.3f}, start_scale};
+    const Btn_info start_btn_drink = {"images/start_btn_drink.png", "images/start_btn_drink.png", {0.7f, 0.3f}, start_scale};
+    const Btn_info start_btn_setting = {"images/start_btn_setting.png", "images/start_btn_setting.png", {0.2f, 0.2f}, start_scale};
+    const Btn_info start_btn_rank = {"images/start_btn_rank.png", "images/start_btn_rank.png", {0.8f, 0.2f}, start_scale};
+    const Btn_info start_btn_play = {"images/start_btn_play.png", "images/start_btn_play.png", {0.5f, 0.2f}, start_scale};
+    const std::string start_role = "images/role_0.png";
+    const cocos2d::Vec2 start_img_role = {0.5f, 0.5f};
 
 }
+
 inline cocos2d::Vec2 operator*(const cocos2d::Vec2& v2, const cocos2d::Size& size)
 {
     return {v2.x * size.width, v2.y * size.height};
 }
+
 namespace mcd {
     inline void scale2size(cocos2d::Sprite* sprite, const cocos2d::Size& size)
     {
         sprite->setScaleX(size.width* 1.f/sprite->getContentSize().width);
         sprite->setScaleY(size.height*1.f/sprite->getContentSize().height);
     }
-
 }
 
 #endif

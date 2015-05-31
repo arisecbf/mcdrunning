@@ -70,6 +70,11 @@
 		B57543AD1B1A100600DD98D9 /* images in Resources */ = {isa = PBXBuildFile; fileRef = B57543AB1B1A100600DD98D9 /* images */; };
 		B57543B11B1A270300DD98D9 /* LoginScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B57543AF1B1A270300DD98D9 /* LoginScene.cpp */; };
 		B57543B31B1A2F6600DD98D9 /* sound in Resources */ = {isa = PBXBuildFile; fileRef = B57543B21B1A2F6600DD98D9 /* sound */; };
+		B57543B61B1AB95E00DD98D9 /* StartScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B57543B41B1AB95E00DD98D9 /* StartScene.cpp */; };
+		B57543B91B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B57543B71B1ABA2F00DD98D9 /* McdLayer.cpp */; };
+		B57543BA1B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B57543B71B1ABA2F00DD98D9 /* McdLayer.cpp */; };
+		B57543BD1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B57543BB1B1ACB3D00DD98D9 /* RoleSelectScene.cpp */; };
+		B57543BE1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B57543BB1B1ACB3D00DD98D9 /* RoleSelectScene.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -172,6 +177,12 @@
 		B57543AF1B1A270300DD98D9 /* LoginScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoginScene.cpp; sourceTree = "<group>"; };
 		B57543B01B1A270300DD98D9 /* LoginScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginScene.h; sourceTree = "<group>"; };
 		B57543B21B1A2F6600DD98D9 /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
+		B57543B41B1AB95E00DD98D9 /* StartScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartScene.cpp; sourceTree = "<group>"; };
+		B57543B51B1AB95E00DD98D9 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScene.h; sourceTree = "<group>"; };
+		B57543B71B1ABA2F00DD98D9 /* McdLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = McdLayer.cpp; sourceTree = "<group>"; };
+		B57543B81B1ABA2F00DD98D9 /* McdLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = McdLayer.h; sourceTree = "<group>"; };
+		B57543BB1B1ACB3D00DD98D9 /* RoleSelectScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoleSelectScene.cpp; sourceTree = "<group>"; };
+		B57543BC1B1ACB3D00DD98D9 /* RoleSelectScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleSelectScene.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -323,6 +334,12 @@
 				B575439F1B1A033700DD98D9 /* Common.h */,
 				B57543AF1B1A270300DD98D9 /* LoginScene.cpp */,
 				B57543B01B1A270300DD98D9 /* LoginScene.h */,
+				B57543B41B1AB95E00DD98D9 /* StartScene.cpp */,
+				B57543B51B1AB95E00DD98D9 /* StartScene.h */,
+				B57543B71B1ABA2F00DD98D9 /* McdLayer.cpp */,
+				B57543B81B1ABA2F00DD98D9 /* McdLayer.h */,
+				B57543BB1B1ACB3D00DD98D9 /* RoleSelectScene.cpp */,
+				B57543BC1B1ACB3D00DD98D9 /* RoleSelectScene.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -526,10 +543,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B57543B61B1AB95E00DD98D9 /* StartScene.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				B57543B91B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
 				B57543A61B1A06DD00DD98D9 /* Msg.cpp in Sources */,
 				B575439D1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				B57543BD1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				B57543B11B1A270300DD98D9 /* LoginScene.cpp in Sources */,
@@ -545,7 +565,9 @@
 				B575439E1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				B57543BA1B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
 				B57543A71B1A06DD00DD98D9 /* Msg.cpp in Sources */,
+				B57543BE1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,7 +38,7 @@ bool LogoScene::init()
     auto& imagePairs = config::logoImages;
 
     // bg
-    auto spbg = Sprite::create("images/white_bg.png");
+    auto spbg = Sprite::create(config::white_bg);
     mcd::scale2size(spbg, windowsSize);
     spbg->setPosition(center);
     this->addChild(spbg, 0);
@@ -61,9 +61,9 @@ bool LogoScene::init()
         auto fadeIn = FadeIn::create(fadeTime);
         auto fadeOut = FadeOut::create(fadeTime);
         auto seq = Sequence::create(actWait, fadeIn, actWait2, fadeOut, NULL);
-        if ( i == imagePairs.size() - 1){
-            seq = Sequence::create(actWait, fadeIn, actWait2, NULL);
-        }
+//        if ( i == imagePairs.size() - 1){
+//            seq = Sequence::create(actWait, fadeIn, actWait2, NULL);
+//        }
         sp->runAction(seq);
     }
 

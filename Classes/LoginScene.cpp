@@ -9,8 +9,9 @@
 #include "LoginScene.h"
 #include "Common.h"
 #include "SimpleAudioEngine.h"
-USING_NS_CC;
+#include "StartScene.h"
 
+USING_NS_CC;
 
 Scene* LoginScene::createScene()
 {
@@ -33,6 +34,7 @@ void LoginScene::touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType ty
     switch (tag) {
         case BTN_QQ:
             CCLOG("login btn qq");
+            Director::getInstance()->replaceScene(StartScene::createScene());
             break;
         case BTN_GUEST:
             CCLOG("login btn guest");
