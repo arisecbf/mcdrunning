@@ -9,6 +9,7 @@
 #include "RoleSelectScene.h"
 #include "Common.h"
 #include "SimpleAudioEngine.h"
+#include "StartScene.h"
 
 USING_NS_CC;
 
@@ -46,13 +47,14 @@ bool RoleSelectScene::init()
     withInOut(decorateButton(config::role_btn_select, BTN_SELECT));
     withInOut(decorateButton(config::role_btn_prev, BTN_PREV));
     withInOut(decorateButton(config::role_btn_next, BTN_NEXT));
-
+    withInOut(decorateButton(config::btn_back, BTN_BACK));
     for (int i = 0; i < config::role_vec_imgs.size(); i++){
         auto img = config::role_vec_imgs[i];
         auto sp = Sprite::create(img);
         this->_roles.push_back(sp);
         sp->setPosition(center);
         this->addChild(sp);
+//        withInOut(sp);
     }
     animate2index(_index);
 
@@ -90,6 +92,9 @@ void RoleSelectScene::onButtonClick(int tag)
             animate2index(_index);
             break;
 
+        case BTN_BACK:
+            turnOut();
+            scheduleOnce([](float){Director::getInstance()->replaceScene(StartScene::createScene());}, config::default_turn_out_time, "234");
         default:
             break;
     }

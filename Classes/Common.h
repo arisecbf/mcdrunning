@@ -67,6 +67,7 @@ namespace config
     const Btn_info role_btn_select = {"images/role_btn_select.png", "images/role_btn_select.png", {0.5f, 0.2f}, 2.f};
     const Btn_info role_btn_prev = {"images/role_btn_prev.png", "images/role_btn_prev.png", {0.2f,0.2f}, 1.f};
     const Btn_info role_btn_next = {"images/role_btn_next.png", "images/role_btn_next.png", {0.8f, 0.2f}, 1.f};
+    const Btn_info btn_back = {"images/btn_back.png", "images/btn_back.png", {0.15f, 0.9f}, 2.f};
     const cocos2d::Vec2 role_pos_middle = {0.5f, 0.5f};
     const cocos2d::Vec2 role_pos_step = {0.17f, 0.f};
     const float role_scale_step = 0.8f;

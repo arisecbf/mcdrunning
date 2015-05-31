@@ -13,6 +13,7 @@
 
 #include "cocos2d.h"
 #include "McdLayer.h"
+#include "Common.h"
 class RoleSelectScene : public McdLayer
 {
 public:
@@ -32,7 +33,8 @@ protected:
     void onButtonClick(int tag) override;
 
     std::vector<cocos2d::Sprite*> _roles;
-    int _index = 0;
+    int _index = static_cast<int>( config::role_vec_imgs.size() / 2);
     void animate2index(int index);
 };
+
 #endif /* defined(__mcdrunning__RoleSelectScene__) */
