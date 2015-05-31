@@ -12,7 +12,8 @@
 #include "cocos2d.h"
 #include "Common.h"
 #include "ui/CocosGUI.h"
-class LoginScene : public cocos2d::Layer
+#include "McdLayer.h"
+class LoginScene : public McdLayer
 {
 public:
     static cocos2d::Scene* createScene();
@@ -21,14 +22,12 @@ public:
 
     CREATE_FUNC(LoginScene);
 
-private:
+protected:
     enum _BTN_TAG{
         BTN_QQ,
         BTN_GUEST
     };
-
-    void decorateButton(const config::Btn_info& btnInfo , int tag);
-    void touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+    void onButtonClick(int tag) override;
 };
 
 #endif /* defined(__mcdrunning__LoginScene__) */

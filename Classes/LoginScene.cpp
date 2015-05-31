@@ -23,18 +23,14 @@ Scene* LoginScene::createScene()
     
     return scene;
 }
-
-void LoginScene::touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType type){
-
-    auto button = static_cast<cocos2d::ui::Button*>(pSender);
-    int tag = button->getTag();
-    if (type != cocos2d::ui::Widget::TouchEventType::ENDED) {
-        return;
-    }
+void LoginScene::onButtonClick(int tag)
+{
     switch (tag) {
         case BTN_QQ:
             CCLOG("login btn qq");
-            Director::getInstance()->replaceScene(StartScene::createScene());
+            turnOut();
+            scheduleOnce([](float){
+                Director::getInstance()->replaceScene(StartScene::createScene());}, config::default_turn_out_time, "sdfd");
             break;
         case BTN_GUEST:
             CCLOG("login btn guest");
@@ -42,19 +38,6 @@ void LoginScene::touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType ty
         default:
             break;
     }
-}
-
-void LoginScene::decorateButton(const config::Btn_info& btnInfo , int tag)
-{
-    auto button = ui::Button::create(btnInfo.img, btnInfo.img_p);
-    button->setPressedActionEnabled(true);
-//    button->setAnchorPoint({0,0});
-    auto size = Director::getInstance()->getVisibleSize();
-    button->setPosition(btnInfo.pos * size);
-    button->setTag(tag);
-    button->addTouchEventListener(CC_CALLBACK_2(LoginScene::touchEvent, this));
-//    button->setScale(config::btn_scale);
-    this->addChild(button, 1);
 }
 
 bool LoginScene::init()
@@ -75,7 +58,9 @@ bool LoginScene::init()
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(config::bgm_default.c_str(), true);
 
     // buttons
-    decorateButton(config::login_btn_guest, BTN_GUEST);
-    decorateButton(config::login_btn_qq, BTN_QQ);
+    withInOut(decorateButton(config::login_btn_guest, BTN_GUEST));
+    withInOut(decorateButton(config::login_btn_qq, BTN_QQ));
+
+    turnIn();
     return true;
 }

@@ -40,3 +40,25 @@ cocos2d::Sprite* McdLayer::decorateImg(const std::string& img, const cocos2d::Ve
     this->addChild(sp, 2);
     return sp;
 }
+
+void McdLayer::withInOut(cocos2d::Node* node)
+{
+    _inoutNodes.push_back(node);
+    node->setOpacity(0);
+}
+
+void McdLayer::turnIn(float dt)
+{
+    auto fadeIn = FadeIn::create(dt);
+    for (auto node : _inoutNodes) {
+        node->runAction(fadeIn->clone());
+    }
+}
+
+void McdLayer::turnOut(float dt)
+{
+    auto fadeOut = FadeOut::create(dt);
+    for (auto node : _inoutNodes){
+        node->runAction(fadeOut->clone());
+    }
+}

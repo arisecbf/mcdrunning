@@ -32,6 +32,9 @@ namespace config
     };
     // common
     const std::string white_bg = "images/white_bg.png";
+    const float default_turn_in_time = 0.3f;
+    const float default_turn_out_time = 0.2f;
+    
     // Brand
     const float default_logo_time = 2.3f;
     const std::vector<std::pair<std::string, float> > logoImages = {

@@ -42,18 +42,19 @@ bool StartScene::init()
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(config::bgm_default.c_str(), true);
 
     // buttons
-    decorateButton(config::start_btn_coin, BTN_COIN);
-    decorateButton(config::start_btn_head, BTN_HEAD);
-    decorateButton(config::start_btn_role, BTN_ROLE);
-    decorateButton(config::start_btn_asset, BTN_ASSET);
-    decorateButton(config::start_btn_drink, BTN_DRINK);
-    decorateButton(config::start_btn_setting, BTN_SETTING);
-    decorateButton(config::start_btn_rank, BTN_RANK);
-    decorateButton(config::start_btn_play, BTN_PLAY);
+    withInOut(decorateButton(config::start_btn_coin, BTN_COIN));
+    withInOut(decorateButton(config::start_btn_head, BTN_HEAD));
+    withInOut(decorateButton(config::start_btn_role, BTN_ROLE));
+    withInOut(decorateButton(config::start_btn_asset, BTN_ASSET));
+    withInOut(decorateButton(config::start_btn_drink, BTN_DRINK));
+    withInOut(decorateButton(config::start_btn_setting, BTN_SETTING));
+    withInOut(decorateButton(config::start_btn_rank, BTN_RANK));
+    withInOut(decorateButton(config::start_btn_play, BTN_PLAY));
 
     // img
-    decorateImg(config::start_role, config::start_img_role);
+    withInOut(decorateImg(config::start_role, config::start_img_role));
 
+    turnIn();
     return true;
 }
 
