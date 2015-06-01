@@ -80,6 +80,9 @@ namespace config
         "images/roles/5.png"};
     const float role_img_scale = 1.f;
     const float role_interval = 0.3f;
+
+    // game scene
+    const Btn_info game_btn_back = {"images/btn_back.png", "images/btn_back.png", {0.1f, 0.94f}, 2.f};
 }
 
 inline cocos2d::Vec2 operator*(const cocos2d::Vec2& v2, const cocos2d::Size& size)

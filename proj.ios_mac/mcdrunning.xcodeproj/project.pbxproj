@@ -60,6 +60,8 @@
 		521A8EAA19F11F5000D177D7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 521A8EA819F11F5000D177D7 /* fonts */; };
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
+		B510AF391B1C8C7D001C1108 /* animation in Resources */ = {isa = PBXBuildFile; fileRef = B510AF381B1C8C7D001C1108 /* animation */; };
+		B510AF3D1B1C9170001C1108 /* animations in Resources */ = {isa = PBXBuildFile; fileRef = B510AF3C1B1C9170001C1108 /* animations */; };
 		B575439D1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */; };
 		B575439E1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */; };
 		B57543A21B1A06CB00DD98D9 /* message.json in Resources */ = {isa = PBXBuildFile; fileRef = B57543A11B1A06CB00DD98D9 /* message.json */; };
@@ -171,6 +173,8 @@
 		521A8EA819F11F5000D177D7 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B510AF381B1C8C7D001C1108 /* animation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animation; sourceTree = "<group>"; };
+		B510AF3C1B1C9170001C1108 /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations; sourceTree = "<group>"; };
 		B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogoScene.cpp; sourceTree = "<group>"; };
 		B575439C1B1A02AC00DD98D9 /* LogoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoScene.h; sourceTree = "<group>"; };
 		B575439F1B1A033700DD98D9 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B510AF3C1B1C9170001C1108 /* animations */,
+				B510AF381B1C8C7D001C1108 /* animation */,
 				B57543C61B1B19FF00DD98D9 /* 3d */,
 				B57543B21B1A2F6600DD98D9 /* sound */,
 				B57543AB1B1A100600DD98D9 /* images */,
@@ -515,6 +521,8 @@
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				B57543A21B1A06CB00DD98D9 /* message.json in Resources */,
 				B57543AC1B1A100600DD98D9 /* images in Resources */,
+				B510AF391B1C8C7D001C1108 /* animation in Resources */,
+				B510AF3D1B1C9170001C1108 /* animations in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
