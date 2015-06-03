@@ -17,7 +17,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/LoginScene.cpp \
                    ../../Classes/LogoScene.cpp \
                    ../../Classes/McdLayer.cpp \
-                   ../../Classes/Msg.cpp \
                    ../../Classes/RoleSelectScene.cpp \
                    ../../Classes/StartScene.cpp 
 
