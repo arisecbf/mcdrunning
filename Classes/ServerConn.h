@@ -14,6 +14,13 @@
 namespace sco {
 
     void httpTest();
+    class AESB64 {
+    public:
+//        void init(const std::string& key, const std::string& iv);
+        std::string encry(std::string datastring);
+        std::string decry(const std::string& b64string);
+    };
+
 
 } // sco
 

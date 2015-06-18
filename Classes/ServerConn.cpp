@@ -12,6 +12,11 @@
 #include <openssl/conf.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
+
+#include <openssl/bio.h>
+#include <openssl/buffer.h>
+#include <stdint.h>
+#include "base64.h"
 #include <string>
 namespace sco {
 
@@ -96,8 +101,8 @@ namespace sco {
         /* Finalise the encryption. Further ciphertext bytes may be written at
          * this stage.
          */
-        if(1 != EVP_EncryptFinal_ex(ctx, ciphertext + len, &len)) handleErrors();
-        ciphertext_len += len;
+        //if(1 != EVP_EncryptFinal_ex(ctx, ciphertext + len, &len)) handleErrors();
+        //else ciphertext_len += len;
         
         /* Clean up */
         EVP_CIPHER_CTX_free(ctx);
@@ -135,15 +140,16 @@ namespace sco {
         /* Finalise the decryption. Further plaintext bytes may be written at
          * this stage.
          */
-        if(1 != EVP_DecryptFinal_ex(ctx, plaintext + len, &len)) handleErrors();
-        plaintext_len += len;
+        //if(1 != EVP_DecryptFinal_ex(ctx, plaintext + len, &len)) handleErrors();
+        //plaintext_len += len;
         
         /* Clean up */
         EVP_CIPHER_CTX_free(ctx);
         
         return plaintext_len;
     }
-    void httpTest(){
+
+    void httpTest3(){
 
         /* Set up the key and iv. Do I need to say to not hard code these in a
          * real application? :-)
@@ -153,11 +159,10 @@ namespace sco {
         unsigned char *key = (unsigned char *)"01234567890123456789012345678901";
 
         /* A 128 bit IV */
-        unsigned char *iv = (unsigned char *)"01234567890123456";
+        unsigned char *iv = (unsigned char *)"0123456789012345";
 
         /* Message to be encrypted */
-        unsigned char *plaintext =
-        (unsigned char *)"The quick brown fox jumps over the lazy dog";
+        unsigned char *plaintext = (unsigned char *)"hello";
 
         /* Buffer for ciphertext. Ensure the buffer is long enough for the
          * ciphertext which may be longer than the plaintext, dependant on the
@@ -175,16 +180,21 @@ namespace sco {
         OpenSSL_add_all_algorithms();
         OPENSSL_config(NULL);
 
+        auto srcLen = strlen((char*)plaintext);
         /* Encrypt the plaintext */
-        ciphertext_len = encrypt (plaintext, strlen ((char *)plaintext), key, iv,
+        ciphertext_len = encrypt (plaintext, srcLen, key, iv,
                                   ciphertext);
 
         /* Do something useful with the ciphertext here */
-        CCLOG("Ciphertext is:\n");
         BIO_dump_fp (stdout, (const char *)ciphertext, ciphertext_len);
 
+        AESB64 gen;
+
+        auto b64text = gen.encry("gggg");//base64_encode(ciphertext, ciphertext_len);
+        CCLOG("%s", b64text.c_str());
+
         /* Decrypt the ciphertext */
-        decryptedtext_len = decrypt(ciphertext, ciphertext_len, key, iv,
+        decryptedtext_len = decrypt((unsigned char*)base64_decode(b64text).c_str(), ciphertext_len, key, iv,
                                     decryptedtext);
         
         /* Add a NULL terminator. We are expecting printable text */
@@ -198,6 +208,89 @@ namespace sco {
         EVP_cleanup();
         ERR_free_strings();
 
+    }
+
+    void httpTest(){
+        AESB64 gen;
+        auto b64 = gen.encry("Apple Google Trunro Game");
+        CCLOG("%s", b64.c_str());
+        auto det = gen.decry("SM+5zuRpsdRHzPy1CTOCNTs4lJ4rPwLJB92C8LNiGnA=");
+        CCLOG("%s", det.c_str());
+    }
+
+    std::string AESB64::encry(std::string datastring)
+    {
+        // 256 bits key
+        unsigned char *key = (unsigned char *)"01234567890123456789012345678901";
+
+        // 128 bits IV
+        unsigned char *iv = (unsigned char *)"0123456789012345";
+
+
+        // Align to block size
+        // Make the python server easy, which is nervous about not aligned data
+        auto tmplen = datastring.length();
+        if (tmplen % AES_BLOCK_SIZE != 0) {
+            for (int i = 0; i < AES_BLOCK_SIZE - (tmplen % AES_BLOCK_SIZE); i++) {
+                datastring.append(" ");
+            }
+        }
+        assert(datastring.length() % AES_BLOCK_SIZE == 0);
+
+        // The extra BLOCK size is for safty of EVP
+        unsigned char *ciphertext = (unsigned char*)malloc((datastring.length() + AES_BLOCK_SIZE) * sizeof(unsigned char));
+        assert(ciphertext != nullptr);
+
+        int ciphertext_len;
+
+        // EVP init
+        ERR_load_crypto_strings();
+        OpenSSL_add_all_algorithms();
+        OPENSSL_config(NULL);
+
+        // Encrypt
+        ciphertext_len = encrypt ((unsigned char *)datastring.c_str(), (int)datastring.length(), key, iv, ciphertext);
+
+        // Clean up
+        EVP_cleanup();
+        ERR_free_strings();
+
+        auto res = base64_encode(ciphertext, ciphertext_len);
+
+        free(ciphertext);
+        return res;
+    }
+
+    std::string AESB64::decry(const std::string& b64string)
+    {
+        unsigned char *key = (unsigned char *)"01234567890123456789012345678901";
+
+        unsigned char *iv = (unsigned char *)"0123456789012345";
+
+        auto data = base64_decode(b64string);
+
+        unsigned char * decryptedtext = (unsigned char *)malloc((data.length() + AES_BLOCK_SIZE)*sizeof(unsigned char));
+        assert(decryptedtext != nullptr);
+        int decryptedtext_len;
+
+        /* Initialise the library */
+        ERR_load_crypto_strings();
+        OpenSSL_add_all_algorithms();
+        OPENSSL_config(NULL);
+
+        /* Decrypt the ciphertext */
+        decryptedtext_len = decrypt((unsigned char *)data.c_str(), 48, key, iv, decryptedtext);
+
+        /* Add a NULL terminator. We are expecting printable text */
+        decryptedtext[decryptedtext_len] = '\0';
+        std::string res((char*)decryptedtext);
+
+        /* Clean up */
+        EVP_cleanup();
+        ERR_free_strings();
+        free(decryptedtext);
+
+        return res;
     }
 
 } // sco

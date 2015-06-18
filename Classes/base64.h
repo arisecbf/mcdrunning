@@ -9,6 +9,9 @@
 #ifndef __mcdrunning__base64__
 #define __mcdrunning__base64__
 
-#include <stdio.h>
+#include <string>
+
+std::string base64_encode(unsigned char const* , size_t len);
+std::string base64_decode(std::string const& s);
 
 #endif /* defined(__mcdrunning__base64__) */

@@ -82,6 +82,8 @@
 		B5B536311B32A4A20088AE74 /* ServerConn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B5362F1B32A4A20088AE74 /* ServerConn.cpp */; };
 		B5B536321B32A4A20088AE74 /* ServerConn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B5362F1B32A4A20088AE74 /* ServerConn.cpp */; };
 		B5B536341B32C2B10088AE74 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B536331B32C2B00088AE74 /* libcrypto.a */; };
+		B5B536371B32F7FD0088AE74 /* base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B536351B32F7FD0088AE74 /* base64.cpp */; };
+		B5B536381B32F7FD0088AE74 /* base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B536351B32F7FD0088AE74 /* base64.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -196,6 +198,8 @@
 		B5B5362F1B32A4A20088AE74 /* ServerConn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerConn.cpp; sourceTree = "<group>"; };
 		B5B536301B32A4A20088AE74 /* ServerConn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConn.h; sourceTree = "<group>"; };
 		B5B536331B32C2B00088AE74 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../aes/Debug-iphonesimulator/libcrypto.a"; sourceTree = "<group>"; };
+		B5B536351B32F7FD0088AE74 /* base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = base64.cpp; sourceTree = "<group>"; };
+		B5B536361B32F7FD0088AE74 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -360,6 +364,8 @@
 				B57543C11B1B120600DD98D9 /* GameScene.h */,
 				B5B5362F1B32A4A20088AE74 /* ServerConn.cpp */,
 				B5B536301B32A4A20088AE74 /* ServerConn.h */,
+				B5B536351B32F7FD0088AE74 /* base64.cpp */,
+				B5B536361B32F7FD0088AE74 /* base64.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -575,6 +581,7 @@
 				B57543BD1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				B5B536371B32F7FD0088AE74 /* base64.cpp in Sources */,
 				B5B536311B32A4A20088AE74 /* ServerConn.cpp in Sources */,
 				B57543B11B1A270300DD98D9 /* LoginScene.cpp in Sources */,
 				B57543C21B1B120600DD98D9 /* GameScene.cpp in Sources */,
@@ -591,6 +598,7 @@
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				B5B536321B32A4A20088AE74 /* ServerConn.cpp in Sources */,
+				B5B536381B32F7FD0088AE74 /* base64.cpp in Sources */,
 				B57543BA1B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
 				B57543C31B1B120600DD98D9 /* GameScene.cpp in Sources */,
 				B57543BE1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
