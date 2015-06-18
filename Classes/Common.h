@@ -83,6 +83,7 @@ namespace config
 
     // game scene
     const Btn_info game_btn_back = {"images/btn_back.png", "images/btn_back.png", {0.1f, 0.94f}, 2.f};
+
 }
 
 inline cocos2d::Vec2 operator*(const cocos2d::Vec2& v2, const cocos2d::Size& size)
@@ -94,7 +95,6 @@ inline cocos2d::Vec2 operator*(const cocos2d::Size& size, const cocos2d::Vec2& v
 {
     return v2*size;
 }
-
 
 namespace mcd {
     inline void scale2size(cocos2d::Sprite* sprite, const cocos2d::Size& size)

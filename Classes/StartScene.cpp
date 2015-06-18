@@ -11,6 +11,7 @@
 #include "SimpleAudioEngine.h"
 #include "RoleSelectScene.h"
 #include "GameScene.h"
+#include "ServerConn.h"
 
 USING_NS_CC;
 
@@ -74,7 +75,13 @@ void StartScene::onButtonClick(int tag)
             scheduleOnce([](float){Director::getInstance()->replaceScene(GameScene::create());}, config::default_turn_out_time, "ds2");
             break;
 
+        case BTN_COIN:
+            sco::httpTest();
+            break;
+
         default:
             break;
     }
 }
+
+// http game server
