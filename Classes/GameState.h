@@ -66,7 +66,7 @@ private:
     int _cbMapIncrimentTag = 0;
     std::unordered_map<std::string, GS_CALL_BACK> _cbMap;
 
-    GameState(){};
+    GameState();
     static GameState _instance;
 
     void onHttpRequestCompleted(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response);

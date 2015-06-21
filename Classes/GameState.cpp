@@ -15,6 +15,8 @@
 #include "../rapidjson/stringbuffer.h"
 
 #include "format.h"
+#include <cstdlib>
+#include <ctime>
 
 using namespace cocos2d;
 using namespace cocos2d::network;
@@ -26,6 +28,11 @@ enum REQ_TYPE{
     REQ_NEWACCT,
 
 };
+
+GameState::GameState()
+{
+    std::srand((unsigned int)std::time(0));
+}
 
 void GameState::newAccount(GS_CALL_BACK callback)
 {
@@ -42,22 +49,18 @@ void GameState::newAccount(GS_CALL_BACK callback)
     request->setResponseCallback(CC_CALLBACK_2(GameState::onHttpRequestCompleted,this));
 
     // gen random id_string
-    auto ra = tr::Rand_int(0,10);
     std::stringstream is2;
     is2 << "isn";
     for (int i = 0; i < 32; i++) {
-        is2 << ra();
+        is2 << std::rand()%10;
     }
     _idString = is2.str();
-
 
     // write the post data
     std::string postData = fmt::sprintf("{\"id_string\":\"%s\"}", _idString);
     CCLOG("%s", postData.c_str());
     auto dec = tr::encry(postData.c_str());
-    CCLOG("%s",dec.c_str());
     auto sendData = tr::UrlEncode(dec);
-    CCLOG("%s", sendData.c_str());
     auto pdata = fmt::sprintf("p=%s", sendData);
     request->setRequestData(pdata.c_str(), pdata.size());
 
@@ -93,7 +96,6 @@ void GameState::onHttpRequestCompleted(HttpClient *sender, HttpResponse *respons
         is << response->getResponseData()->at(i);
     }
     auto rawData = is.str();
-    CCLOG("RES %s , %s", response->getResponseDataString(), rawData.c_str());
 
     // decode data
     auto lightData = tr::decry(rawData);

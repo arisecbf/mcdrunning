@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include <random>
 #include <functional>
+#include <ctime>
 
 namespace tr {
 
@@ -20,15 +21,6 @@ namespace tr {
     std::string encry(std::string datastring);
 
     std::string decry(const std::string& b64string);
-
-    class Rand_int {
-    public:
-        Rand_int(int lo, int hi) : p{lo,hi} { } // store the parameters
-        int operator()() const { return r(); }
-    private:
-        std::uniform_int_distribution<>::param_type p;
-        std::function<int(void)> r = bind(std::uniform_int_distribution<>{p}, std::default_random_engine{});
-    };
 } // tr
 
 #endif /* defined(__mcdrunning__ServerConn__) */

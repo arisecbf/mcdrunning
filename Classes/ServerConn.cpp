@@ -183,6 +183,7 @@ namespace tr {
         return res;
     }
 
+    ///////////test code//////////////
     void test(){
         std::string in = "{\"err_code\":1,\"err_msg\":\"id_string exists\"} ";
         auto enc = encry(in);

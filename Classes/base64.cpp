@@ -34,8 +34,9 @@ static const std::string base64_chars =
 "0123456789+/";
 
 
-static inline bool is_base64(unsigned char c) {
-    return (isalnum(c) || (c == '+') || (c == '/'));
+static inline bool is_base64_accept(unsigned char c) {
+    // newline is acceptable, but mean nothing
+    return (isalnum(c) || (c == '+') || (c == '/') || (c == '\n'));
 }
 
 std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
@@ -89,8 +90,13 @@ std::string base64_decode(std::string const& encoded_string) {
     unsigned char char_array_4[4], char_array_3[3];
     std::string ret;
 
-    while (in_len-- && ( encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {
-        char_array_4[i++] = encoded_string[in_]; in_++;
+    while (in_len-- && ( encoded_string[in_] != '=') && is_base64_accept(encoded_string[in_])) {
+
+        char c = encoded_string[in_++];
+        if (c == '\n') continue; // escape newlines!
+
+        char_array_4[i++] = c;
+
         if (i ==4) {
             for (i = 0; i <4; i++)
                 char_array_4[i] = base64_chars.find(char_array_4[i]);
