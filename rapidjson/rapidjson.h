@@ -109,8 +109,10 @@
     \brief   provide custom rapidjson namespace (closing expression)
     \see RAPIDJSON_NAMESPACE
 */
+
 #ifndef RAPIDJSON_NAMESPACE
-#define RAPIDJSON_NAMESPACE rapidjson
+// change ns for dulplicate exist
+#define RAPIDJSON_NAMESPACE rjson
 #endif
 #ifndef RAPIDJSON_NAMESPACE_BEGIN
 #define RAPIDJSON_NAMESPACE_BEGIN namespace RAPIDJSON_NAMESPACE {

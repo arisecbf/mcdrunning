@@ -12,6 +12,7 @@
 #include "RoleSelectScene.h"
 #include "GameScene.h"
 #include "ServerConn.h"
+#include "GameState.h"
 
 USING_NS_CC;
 
@@ -75,8 +76,14 @@ void StartScene::onButtonClick(int tag)
             scheduleOnce([](float){Director::getInstance()->replaceScene(GameScene::create());}, config::default_turn_out_time, "ds2");
             break;
 
-        case BTN_COIN:
-            sco::httpTest();
+        case BTN_COIN:{
+            auto cb = [](int errCode){};
+            GameState::g()->newAccount(cb);
+            }
+            break;
+
+        case BTN_DRINK:
+            tr::test();
             break;
 
         default:

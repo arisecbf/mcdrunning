@@ -10,18 +10,25 @@
 #define __mcdrunning__ServerConn__
 
 #include "cocos2d.h"
+#include <random>
+#include <functional>
 
-namespace sco {
+namespace tr {
 
-    void httpTest();
-    class AESB64 {
+    void test();
+
+    std::string encry(std::string datastring);
+
+    std::string decry(const std::string& b64string);
+
+    class Rand_int {
     public:
-//        void init(const std::string& key, const std::string& iv);
-        std::string encry(std::string datastring);
-        std::string decry(const std::string& b64string);
+        Rand_int(int lo, int hi) : p{lo,hi} { } // store the parameters
+        int operator()() const { return r(); }
+    private:
+        std::uniform_int_distribution<>::param_type p;
+        std::function<int(void)> r = bind(std::uniform_int_distribution<>{p}, std::default_random_engine{});
     };
-
-
-} // sco
+} // tr
 
 #endif /* defined(__mcdrunning__ServerConn__) */
