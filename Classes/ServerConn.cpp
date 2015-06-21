@@ -47,6 +47,8 @@ namespace tr {
         if(1 != EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, iv))
             handleErrors();
 
+        EVP_CIPHER_CTX_set_padding(ctx, 0);
+
         /* Provide the message to be encrypted, and obtain the encrypted output.
          * EVP_EncryptUpdate can be called multiple times if necessary
          */
@@ -57,9 +59,8 @@ namespace tr {
         /* Finalise the encryption. Further ciphertext bytes may be written at
          * this stage.
          */
-        // ossl has problem with aligned input, the result is diff from same thing of pycrypto
         if(1 != EVP_EncryptFinal_ex(ctx, ciphertext + len, &len)) handleErrors();
-        else ciphertext_len += len;
+        ciphertext_len += len;
 
         /* Clean up */
         EVP_CIPHER_CTX_free(ctx);
@@ -79,6 +80,7 @@ namespace tr {
         /* Create and initialise the context */
         if(!(ctx = EVP_CIPHER_CTX_new())) handleErrors();
 
+
         /* Initialise the decryption operation. IMPORTANT - ensure you use a key
          * and IV size appropriate for your cipher
          * In this example we are using 256 bit AES (i.e. a 256 bit key). The
@@ -86,6 +88,9 @@ namespace tr {
          * is 128 bits */
         if(1 != EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, iv))
             handleErrors();
+
+        // set not padding
+        EVP_CIPHER_CTX_set_padding(ctx, 0); // must after init
 
         /* Provide the message to be decrypted, and obtain the plaintext output.
          * EVP_DecryptUpdate can be called multiple times if necessary
@@ -117,14 +122,14 @@ namespace tr {
     {
         // Align to block size
         // Make the python server easy, which is nervous about not aligned data
-        /*
+
         auto tmplen = datastring.length();
         if (tmplen % AES_BLOCK_SIZE != 0) {
             for (int i = 0; i < AES_BLOCK_SIZE - (tmplen % AES_BLOCK_SIZE); i++) {
                 datastring.append(" ");
             }
         }
-        assert(datastring.length() % AES_BLOCK_SIZE == 0);*/
+        assert(datastring.length() % AES_BLOCK_SIZE == 0);
 
         // The extra BLOCK size is for safty of EVP
         unsigned char *ciphertext = (unsigned char*)malloc((datastring.length() + AES_BLOCK_SIZE) * sizeof(unsigned char));
@@ -138,7 +143,7 @@ namespace tr {
         OPENSSL_config(NULL);
 
         // Encrypt
-        ciphertext_len = encrypt ((unsigned char *)datastring.c_str(), (int)datastring.length(), KEY, IV, ciphertext);
+        ciphertext_len = encrypt ((unsigned char *)datastring.c_str(), (int)datastring.size(), KEY, IV, ciphertext);
 
         // Clean up
         EVP_cleanup();
@@ -164,7 +169,7 @@ namespace tr {
         OPENSSL_config(NULL);
 
         /* Decrypt the ciphertext */
-        decryptedtext_len = decrypt((unsigned char *)data.c_str(), 48, KEY, IV, decryptedtext);
+        decryptedtext_len = decrypt((unsigned char *)data.c_str(), data.size(), KEY, IV, decryptedtext);
 
         /* Add a NULL terminator. We are expecting printable text */
         decryptedtext[decryptedtext_len] = '\0';
@@ -179,11 +184,67 @@ namespace tr {
     }
 
     void test(){
-        std::string in = "{\"err_code\":1,\"err_msg\":\"id_string exists\"}    ";
+        std::string in = "{\"err_code\":1,\"err_msg\":\"id_string exists\"} ";
         auto enc = encry(in);
         CCLOG("%s", enc.c_str());
         auto dec = decry(enc);
         CCLOG("%s", dec.c_str());
     }
 
+    void test2(){
+        /* Set up the key and iv. Do I need to say to not hard code these in a
+         * real application? :-)
+         */
+
+        /* A 256 bit key */
+        unsigned char *key = (unsigned char *)"01234567890123456789012345678901";
+
+        /* A 128 bit IV */
+        unsigned char *iv = (unsigned char *)"01234567890123456";
+
+        /* Message to be encrypted */
+        unsigned char *plaintext =
+        (unsigned char *)"{\"err_code\":1,\"err_msg\":\"id_string exists\"}     ";
+
+        /* Buffer for ciphertext. Ensure the buffer is long enough for the
+         * ciphertext which may be longer than the plaintext, dependant on the
+         * algorithm and mode
+         */
+        unsigned char ciphertext[128];
+
+        /* Buffer for the decrypted text */
+        unsigned char decryptedtext[128];
+
+        int decryptedtext_len, ciphertext_len;
+
+        /* Initialise the library */
+        ERR_load_crypto_strings();
+        OpenSSL_add_all_algorithms();
+        OPENSSL_config(NULL);
+
+        /* Encrypt the plaintext */
+        ciphertext_len = encrypt (plaintext, strlen ((char *)plaintext), key, iv,
+                                  ciphertext);
+
+        /* Do something useful with the ciphertext here */
+        printf("Ciphertext is:\n");
+        BIO_dump_fp (stdout, (const char *)ciphertext, ciphertext_len);
+        auto enc = base64_encode(ciphertext, ciphertext_len);
+        CCLOG("%s", enc.c_str());
+        /* Decrypt the ciphertext */
+        decryptedtext_len = decrypt((unsigned char*)base64_decode(enc).c_str(), ciphertext_len, key, iv,
+                                    decryptedtext);
+        
+        /* Add a NULL terminator. We are expecting printable text */
+        decryptedtext[decryptedtext_len] = '\0';
+        
+        /* Show the decrypted text */
+        printf("Decrypted text is:\n");
+        printf("%s\n", decryptedtext);
+        
+        /* Clean up */
+        EVP_cleanup();
+        ERR_free_strings();
+        test2();
+    }
 } // tr
