@@ -15,6 +15,7 @@
 #include "GameState.h"
 #include "GoldLayer.h"
 #include "CharacterScene.h"
+#include "PropScene.h"
 
 USING_NS_CC;
 
@@ -91,6 +92,12 @@ void StartScene::onButtonClick(int tag)
         case BTN_DRINK:
             tr::test();
             break;
+
+        case BTN_ASSET:
+            turnOut();
+            scheduleOnce([](float){Director::getInstance()->replaceScene(PropScene::create());}, config::default_turn_out_time, "ds3");
+            break;
+
 
         default:
             break;

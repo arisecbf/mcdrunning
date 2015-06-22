@@ -39,6 +39,43 @@ public:
         id(id), gold(gold), title(title), desc(desc){};
 };
 
+class Prop
+{
+public:
+    enum PropType{
+        REDWINE,
+        XO,
+        MAGNET,
+        MILK,
+        SHIELD,
+        TMAX
+    };
+
+    int type;
+    int level;
+    bool canUpgrade(){
+        return type != SHIELD && level < 5;
+    }
+    int upgradeCost(){
+        return level == 0 ? 500:
+        level == 1 ? 1000:
+        level == 2 ? 2000:
+        level == 3 ? 3500:
+        level == 4 ? 5000: 0;
+    }
+    std::string getTitle(){
+        return type == REDWINE? "redwine":
+        type == XO? "xo":
+        type == MAGNET? "magnet":
+        type == MILK? "milk":
+        type == SHIELD? "shield":">>>error<<<";
+    }
+    int count;
+    Prop():type(0),level(0){};
+    Prop(int type, int level):
+        type(type), level(level){};
+};
+
 class GameState
 {
 public:
@@ -98,6 +135,10 @@ public:
             return true;
         }
     }
+    Prop* getProp(int type){
+        assert(type < Prop::TMAX && type >= 0);
+        return &_propMap[type];
+    }
 private:
     int _id;
     std::string _idString;
@@ -122,6 +163,7 @@ private:
     std::vector<int> _characterIds;
     std::unordered_map<int, Character> _characterMap;
     int _selectedCharId = 0;
+    std::unordered_map<int, Prop> _propMap;
 };
 
 #endif /* defined(__mcdrunning__GameState__) */

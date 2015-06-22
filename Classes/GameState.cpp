@@ -32,6 +32,9 @@ enum REQ_TYPE{
 GameState::GameState()
 {
     std::srand((unsigned int)std::time(0));
+    for (int i = 0; i < Prop::TMAX; i++) {
+        _propMap[i] = Prop(i, 0);
+    }
 }
 
 void GameState::load()

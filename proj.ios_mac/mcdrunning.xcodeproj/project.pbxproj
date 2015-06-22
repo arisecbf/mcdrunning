@@ -62,6 +62,8 @@
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		B510AF391B1C8C7D001C1108 /* animation in Resources */ = {isa = PBXBuildFile; fileRef = B510AF381B1C8C7D001C1108 /* animation */; };
 		B510AF3D1B1C9170001C1108 /* animations in Resources */ = {isa = PBXBuildFile; fileRef = B510AF3C1B1C9170001C1108 /* animations */; };
+		B511915F1B38A0F700C2B134 /* PropScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B511915D1B38A0F700C2B134 /* PropScene.cpp */; };
+		B51191601B38A0F700C2B134 /* PropScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B511915D1B38A0F700C2B134 /* PropScene.cpp */; };
 		B541E6111B37F25000B926F3 /* GoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E60F1B37F25000B926F3 /* GoldLayer.cpp */; };
 		B541E6121B37F25000B926F3 /* GoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E60F1B37F25000B926F3 /* GoldLayer.cpp */; };
 		B541E6151B3811B000B926F3 /* BuyGoldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6131B3811B000B926F3 /* BuyGoldScene.cpp */; };
@@ -196,6 +198,8 @@
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B510AF381B1C8C7D001C1108 /* animation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animation; sourceTree = "<group>"; };
 		B510AF3C1B1C9170001C1108 /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations; sourceTree = "<group>"; };
+		B511915D1B38A0F700C2B134 /* PropScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PropScene.cpp; sourceTree = "<group>"; };
+		B511915E1B38A0F700C2B134 /* PropScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropScene.h; sourceTree = "<group>"; };
 		B541E60F1B37F25000B926F3 /* GoldLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GoldLayer.cpp; sourceTree = "<group>"; };
 		B541E6101B37F25000B926F3 /* GoldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoldLayer.h; sourceTree = "<group>"; };
 		B541E6131B3811B000B926F3 /* BuyGoldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BuyGoldScene.cpp; sourceTree = "<group>"; };
@@ -476,6 +480,8 @@
 				B57543BC1B1ACB3D00DD98D9 /* RoleSelectScene.h */,
 				B541E61D1B3847EF00B926F3 /* CharacterScene.cpp */,
 				B541E61E1B3847EF00B926F3 /* CharacterScene.h */,
+				B511915D1B38A0F700C2B134 /* PropScene.cpp */,
+				B511915E1B38A0F700C2B134 /* PropScene.h */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -650,6 +656,7 @@
 				B57543BD1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				B511915F1B38A0F700C2B134 /* PropScene.cpp in Sources */,
 				B5B536371B32F7FD0088AE74 /* base64.cpp in Sources */,
 				B5B536311B32A4A20088AE74 /* ServerConn.cpp in Sources */,
 				B541E6231B384AA200B926F3 /* Msg.cpp in Sources */,
@@ -666,6 +673,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				B51191601B38A0F700C2B134 /* PropScene.cpp in Sources */,
 				B5B5363C1B333CB40088AE74 /* GameState.cpp in Sources */,
 				B541E6241B384AA200B926F3 /* Msg.cpp in Sources */,
 				B575439E1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */,
