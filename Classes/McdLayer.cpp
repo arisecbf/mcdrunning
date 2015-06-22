@@ -10,13 +10,13 @@
 #include "SimpleAudioEngine.h"
 USING_NS_CC;
 
-ui::Button* McdLayer::decorateButton(const config::Btn_info& btnInfo , int tag)
+ui::Button* McdLayer::decorateButton(const Btn_info& btnInfo , int tag)
 {
     auto button = ui::Button::create(btnInfo.img, btnInfo.img_p);
     button->setPressedActionEnabled(true);
     //    button->setAnchorPoint({0,0});
     auto size = Director::getInstance()->getVisibleSize();
-    button->setPosition(btnInfo.pos * size);
+    button->setPosition(genPos(btnInfo.pos));
     button->setTag(tag);
     button->addTouchEventListener(CC_CALLBACK_2(McdLayer::touchEvent, this));
     button->setScale(btnInfo.scale);
@@ -38,7 +38,7 @@ void McdLayer::touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType type
 cocos2d::Sprite* McdLayer::decorateImg(const std::string& img, const cocos2d::Vec2& pos)
 {
     auto sp = Sprite::create(img);
-    sp->setPosition(pos * Director::getInstance()->getVisibleSize());
+    sp->setPosition(genPos(pos));
     this->addChild(sp, 2);
     return sp;
 }
@@ -63,4 +63,15 @@ void McdLayer::turnOut(float dt)
     for (auto node : _inoutNodes){
         node->runAction(fadeOut->clone());
     }
+}
+
+cocos2d::Vec2 McdLayer::genPos(const cocos2d::Vec2& pos)
+{
+    auto size = Director::getInstance()->getVisibleSize();
+    return {size.width * pos.x, size.height * pos.y};
+}
+
+cocos2d::Vec3 McdLayer::genPos3D(const cocos2d::Vec2& pos, float z){
+    auto size = Director::getInstance()->getVisibleSize();
+    return {size.width * pos.x, size.height * pos.y, z};
 }

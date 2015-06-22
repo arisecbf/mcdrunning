@@ -41,80 +41,58 @@ bool GameScene::init()
     if (!Scene::init()){
         return false;
     }
-    int c = 1000;
-    CCLOG("game scene init");
     _bgLayer = Layer::create();
     this->addChild(_bgLayer, 0);
-    CCLOG("game scene init %d", c++);
     auto size = Director::getInstance()->getVisibleSize();
     Vec2 center = {size.width/2, size.height/2};
-CCLOG("game scene init %d", c++);
 
     // 3D layer
     _gameLayer = Layer::create();
     this->addChild(_gameLayer, 1);
-CCLOG("game scene init %d", c++);
     auto bg =  BillBoard::create("images/street_bg.jpg");
     bg->setPosition3D({0,0,100});
-    CCLOG("game scene init %d", c++);
     bg->setScale(4.f);
     _gameLayer->addChild(bg);
-CCLOG("game scene init %d", c++);
     // streets
     _streets.reserve(_streetMax);
     _jingbis.reserve(_streetMax);
-    CCLOG("game scene init %d", c++);
     float z_pos_now = _zNear;
-    CCLOG("game scene init %d", c++);
     for (int i = 0; i < _streetMax; i++) {
-        CCLOG("game scene init %d sp3d before", c++);
         auto sp3d = Sprite3D::create("3d/street_wall.c3t");
-        CCLOG("game scene init %d sp3d after", c++);
         if (sp3d == nullptr) {CCLOG("nullptr sp3d");}
         auto jb = Sprite3D::create("3d/jingbix.c3b");
         sp3d->setPosition3D({0, 0, z_pos_now});
         jb->setPosition3D(sp3d->getPosition3D() + Vec3{0,5,0});
         _jingbis.push_back(jb);
-        CCLOG("game scene init %d", c++);
         z_pos_now -= _perStreetLength;
         sp3d->setScale(5.f);
         _streets.push_back(sp3d);
-        CCLOG("game scene init %d", c++);
         _gameLayer->addChild(sp3d, 1);
         _gameLayer->addChild(jb, 1);
-        CCLOG("game scene init %d", c++);
         jb->setScale(3.f);
         jb->runAction(RepeatForever::create(RotateBy::create(2.f, {0,360,0})));
-        CCLOG("game scene init %d", c++);
     }
-CCLOG("game scene init %d", c++);
     // camera
     _camera = Camera::createPerspective(60, size.width/size.height, 1, 1000);
     _camera->setPosition3D({0, 0, 1000});
     _camera->lookAt({0,0,0});
     _camera->setCameraFlag(CameraFlag::USER1);
     _gameLayer->addChild(_camera);
-CCLOG("game scene init %d", c++);
     _gameLayer->setCameraMask((unsigned short)CameraFlag::USER1);
-CCLOG("game scene init %d", c++);
     // front UI layer
     _uiLayer = Layer::create();
     this->addChild(_uiLayer, 2);
-CCLOG("game scene init %d", c++);
     // speed bar
     auto speedBar = Sprite::create("images/speed_bar.png");
     speedBar->setPosition(Vec2{0.5f, 0.85f} * size);
     speedBar->setScale(2.5f, 2.0f);
     _uiLayer->addChild(speedBar, 100);
-CCLOG("game scene init %d", c++);
     _spBarIndex = Sprite::create("images/speed_anchor.png");
     _spBarIndex->setPosition(speedBar->getPosition());
     _spBarIndex->setScale(1.f, 2.f);
-    CCLOG("game scene init %d", c++);
     _uiLayer->addChild(_spBarIndex, 100);
     _barX = speedBar->getPositionX() - speedBar->getContentSize().width * 2.5f *0.5f;
     _barW = speedBar->getContentSize().width * 2.5f;
-CCLOG("game scene init %d", c++);
     // score labels
     _lbLength = Label::createWithTTF("0", "fonts/caton.ttf", 50);
     _lbScore = Label::createWithTTF("0", "fonts/caton.ttf", 50);
@@ -123,15 +101,12 @@ CCLOG("game scene init %d", c++);
     _lbLength->setColor({0,0,0});
     _lbScore->setColor({0,0,0});
     _uiLayer->addChild(_lbScore);
-    CCLOG("game scene init %d", c++);
     _uiLayer->addChild(_lbLength);
     _lbSpeed = Label::createWithTTF("0", "fonts/caton.ttf", 50);
     _lbSpeed->setPosition(Vec2{0.5f, 0.9f} * size);
     _lbSpeed->setColor({0,0,0});
     //_uiLayer->addChild(_lbSpeed);
-CCLOG("game scene init %d", c++);
     this->addChild(GameUILayer::create());
-CCLOG("game scene init %d", c++);
     // UIO
     auto listener = EventListenerTouchOneByOne::create();
     listener->setSwallowTouches(true);
@@ -142,13 +117,11 @@ CCLOG("game scene init %d", c++);
         this->_beTouching = true;
         return true;
     };
-CCLOG("game scene init %d", c++);
     listener->onTouchEnded = [&](Touch* touch ,Event* event){
         auto loc = touch->getLocation();
         CCLOG("ended %f, %f", loc.x, loc.y);
         this->_beTouching = false;
     };
-CCLOG("game scene init %d", c++);
     listener->onTouchCancelled = [&](Touch* touch, Event* event){
         auto loc = touch->getLocation();
         CCLOG("cancel %f %f", loc.x, loc.y);
@@ -163,7 +136,6 @@ CCLOG("game scene init %d", c++);
     role2->setPosition(Vec2{0.5f, 0.3f}*size);
     _uiLayer->addChild(role2);
     role2->setScale(5.f);
-CCLOG("game scene init %d", c++);
     auto animation = Animation::create();
     for( int i=1;i<15;i++)
     {
@@ -176,19 +148,15 @@ CCLOG("game scene init %d", c++);
 
     auto action = Animate::create(animation);
     role->runAction(RepeatForever::create( Sequence::create(action, action->reverse(), NULL)));
-CCLOG("game scene init %d", c++);
     auto cache = AnimationCache::getInstance();
     cache->addAnimationsWithFile("animations/animations-2.plist");
     auto animation2 = cache->getAnimation("dance_1");
-CCLOG("game scene init %d", c++);
     auto action2 = Animate::create(animation2);
     role2->runAction(RepeatForever::create(Sequence::create(action2, action2->reverse(), NULL)));
 
-CCLOG("game scene init %d", c++);
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     scheduleUpdate();
-    CCLOG("game scene init %d over", c++);
     return true;
 }
 

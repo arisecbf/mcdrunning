@@ -62,6 +62,8 @@
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		B510AF391B1C8C7D001C1108 /* animation in Resources */ = {isa = PBXBuildFile; fileRef = B510AF381B1C8C7D001C1108 /* animation */; };
 		B510AF3D1B1C9170001C1108 /* animations in Resources */ = {isa = PBXBuildFile; fileRef = B510AF3C1B1C9170001C1108 /* animations */; };
+		B541E6111B37F25000B926F3 /* GoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E60F1B37F25000B926F3 /* GoldLayer.cpp */; };
+		B541E6121B37F25000B926F3 /* GoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E60F1B37F25000B926F3 /* GoldLayer.cpp */; };
 		B575439D1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */; };
 		B575439E1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */; };
 		B57543A21B1A06CB00DD98D9 /* message.json in Resources */ = {isa = PBXBuildFile; fileRef = B57543A11B1A06CB00DD98D9 /* message.json */; };
@@ -184,6 +186,8 @@
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B510AF381B1C8C7D001C1108 /* animation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animation; sourceTree = "<group>"; };
 		B510AF3C1B1C9170001C1108 /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations; sourceTree = "<group>"; };
+		B541E60F1B37F25000B926F3 /* GoldLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GoldLayer.cpp; sourceTree = "<group>"; };
+		B541E6101B37F25000B926F3 /* GoldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoldLayer.h; sourceTree = "<group>"; };
 		B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogoScene.cpp; sourceTree = "<group>"; };
 		B575439C1B1A02AC00DD98D9 /* LogoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoScene.h; sourceTree = "<group>"; };
 		B575439F1B1A033700DD98D9 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B541E60E1B37F21300B926F3 /* ui */,
 				B5F63CDE1B36F7A000404E68 /* format.cc */,
 				B5F63CDF1B36F7A000404E68 /* format.h */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
@@ -435,6 +440,15 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
+		};
+		B541E60E1B37F21300B926F3 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				B541E60F1B37F25000B926F3 /* GoldLayer.cpp */,
+				B541E6101B37F25000B926F3 /* GoldLayer.h */,
+			);
+			name = ui;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -606,6 +620,7 @@
 				B57543B11B1A270300DD98D9 /* LoginScene.cpp in Sources */,
 				B5B5363B1B333CB40088AE74 /* GameState.cpp in Sources */,
 				B57543C21B1B120600DD98D9 /* GameScene.cpp in Sources */,
+				B541E6111B37F25000B926F3 /* GoldLayer.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,6 +640,7 @@
 				B5B536381B32F7FD0088AE74 /* base64.cpp in Sources */,
 				B57543BA1B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
 				B57543C31B1B120600DD98D9 /* GameScene.cpp in Sources */,
+				B541E6121B37F25000B926F3 /* GoldLayer.cpp in Sources */,
 				B57543BE1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

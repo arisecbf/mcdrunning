@@ -12,31 +12,21 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include "McdLayer.h"
 
 #include "cocos2d.h"
 
 // 为了适应不同屏幕，位置信息均要求是[0,1.0]相对的。
 namespace config
 {
-    struct Btn_info{
-        std::string img;
-        std::string img_p;
-        cocos2d::Vec2 pos;
-        float scale;
-        Btn_info(const std::string& img0, const std::string& img1, const cocos2d::Vec2& pos, float scale){
-            this->img = img0;
-            this->img_p = img1;
-            this->pos = pos;
-            this->scale = scale;
-        }
-    };
+
     // common
     const std::string white_bg = "images/white_bg.png";
     const float default_turn_in_time = 0.3f;
     const float default_turn_out_time = 0.2f;
     
     // Brand
-    const float default_logo_time = 2.3f;
+    const float default_logo_time = 0.3f;
     const std::vector<std::pair<std::string, float> > logoImages = {
         {"images/port_i6_first_party.png", default_logo_time},
         {"images/port_i6.png", default_logo_time}

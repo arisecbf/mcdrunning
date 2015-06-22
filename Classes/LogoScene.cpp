@@ -9,6 +9,7 @@
 #include "LogoScene.h"
 #include "Common.h"
 #include "LoginScene.h"
+#include "StartScene.h"
 
 #include <vector>
 
@@ -67,7 +68,7 @@ bool LogoScene::init()
         sp->runAction(seq);
     }
 
-    scheduleOnce([&delaySum](float){Director::getInstance()->replaceScene(LoginScene::createScene());},delaySum, "login_scene");
+    scheduleOnce([&delaySum](float){Director::getInstance()->replaceScene(StartScene::createScene());},delaySum, "login_scene");
 
     return true;
 }

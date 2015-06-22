@@ -11,6 +11,8 @@
 
 #include "cocos2d.h"
 #include "McdLayer.h"
+#include "GoldLayer.h"
+
 class StartScene : public McdLayer
 {
 public:
@@ -30,5 +32,7 @@ protected:
         BTN_SETTING
     };
     void onButtonClick(int tag) override;
+
+    GoldLayer* _goldLayer;
 };
 #endif /* defined(__mcdrunning__StartScene__) */

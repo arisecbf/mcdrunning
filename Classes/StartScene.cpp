@@ -13,6 +13,7 @@
 #include "GameScene.h"
 #include "ServerConn.h"
 #include "GameState.h"
+#include "GoldLayer.h"
 
 USING_NS_CC;
 
@@ -36,7 +37,7 @@ bool StartScene::init()
     Size windowsSize = Director::getInstance()->getVisibleSize();
     auto center =Vec2{windowsSize.width, windowsSize.height} * 0.5f;
 
-    // white bg
+//     white bg
     auto bg = Sprite::create(config::start_bg);
     mcd::scale2size(bg, windowsSize);
     bg->setPosition(center);
@@ -46,7 +47,6 @@ bool StartScene::init()
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(config::bgm_default.c_str(), true);
 
     // buttons
-    withInOut(decorateButton(config::start_btn_coin, BTN_COIN));
     withInOut(decorateButton(config::start_btn_head, BTN_HEAD));
     withInOut(decorateButton(config::start_btn_role, BTN_ROLE));
     withInOut(decorateButton(config::start_btn_asset, BTN_ASSET));
@@ -59,6 +59,11 @@ bool StartScene::init()
     withInOut(decorateImg(config::start_role, config::start_img_role));
 
     turnIn();
+
+    // 金币
+    _goldLayer = GoldLayer::create();
+    this->addChild(_goldLayer, 1);
+    
     return true;
 }
 

@@ -53,6 +53,10 @@ public:
 
     void getNear6(GS_CALL_BACK callback);
 
+    //get/set
+    int getGold(){return  _gold;};
+    void setGold(int gold){_gold = gold;}
+
 private:
     int _id;
     std::string _idString;
@@ -70,6 +74,9 @@ private:
     static GameState _instance;
 
     void onHttpRequestCompleted(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response);
+
+    // pure local data
+    int _gold = 999;
 };
 
 #endif /* defined(__mcdrunning__GameState__) */
