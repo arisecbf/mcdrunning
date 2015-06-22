@@ -10,18 +10,45 @@
 #include "SimpleAudioEngine.h"
 USING_NS_CC;
 
+bool McdLayer::init()
+{
+    assert(Layer::init());
+
+    return true;
+}
+
+void McdLayer::onButtonClick(int tag)
+{
+    if (_cbMap.find(tag) == _cbMap.end()){
+        CCLOG("no callback with tag %d", tag);
+    } else {
+        _cbMap[tag]();
+    }
+}
+
 ui::Button* McdLayer::decorateButton(const Btn_info& btnInfo , int tag)
 {
     auto button = ui::Button::create(btnInfo.img, btnInfo.img_p);
     button->setPressedActionEnabled(true);
     //    button->setAnchorPoint({0,0});
-    auto size = Director::getInstance()->getVisibleSize();
     button->setPosition(genPos(btnInfo.pos));
     button->setTag(tag);
     button->addTouchEventListener(CC_CALLBACK_2(McdLayer::touchEvent, this));
     button->setScale(btnInfo.scale);
     this->addChild(button, 1);
     return button;
+}
+
+void McdLayer::decorateButtonEx(const Btn_info& btnInfo, BTN_CALLBACK callback){
+    auto button = ui::Button::create(btnInfo.img, btnInfo.img_p);
+    button->setPressedActionEnabled(true);
+    button->setPosition(genPos(btnInfo.pos));
+    auto mytag = _tagAI++;
+    button->setTag(mytag);
+    button->addTouchEventListener(CC_CALLBACK_2(McdLayer::touchEvent, this));
+    button->setScale(btnInfo.scale);
+    this->addChild(button, 1);
+    _cbMap[mytag] = callback;
 }
 
 void McdLayer::touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType type){

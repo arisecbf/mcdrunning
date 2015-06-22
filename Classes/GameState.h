@@ -36,6 +36,7 @@ public:
 
     // Singleton access
     static GameState* g(){ return &_instance; };
+    static GameState* k(){ return &_instance; };
 
     // Store game state to file
     void store();
@@ -56,6 +57,7 @@ public:
     //get/set
     int getGold(){return  _gold;};
     void setGold(int gold){_gold = gold;}
+    void addGold(int gold){_gold += gold;}
 
 private:
     int _id;

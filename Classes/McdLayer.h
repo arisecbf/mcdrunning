@@ -13,6 +13,7 @@
 
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
+#include <unordered_map>
 
 struct Btn_info{
     std::string img;
@@ -29,11 +30,21 @@ struct Btn_info{
 
 class McdLayer : public cocos2d::Layer
 {
+public:
+
+    typedef std::function<void(void)> BTN_CALLBACK;
+
+    virtual bool init() override;
+    CREATE_FUNC(McdLayer);
+
+    void decorateButtonEx(const Btn_info& btnInfo, BTN_CALLBACK callback);
+
 protected:
     virtual cocos2d::ui::Button* decorateButton(const Btn_info& btnInfo , int tag);
     virtual cocos2d::Sprite* decorateImg(const std::string& img, const cocos2d::Vec2& pos);
+
     virtual void touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-    virtual void onButtonClick(int tag) = 0;
+    virtual void onButtonClick(int tag);
 
     void withInOut(cocos2d::Node* node);
     void turnIn(float dt);
@@ -46,6 +57,8 @@ protected:
 
 private:
     std::vector<cocos2d::Node*> _inoutNodes;
+    int _tagAI = 1000;
+    std::unordered_map<int, BTN_CALLBACK> _cbMap;
 };
 
 #endif /* defined(__mcdrunning__McdLayer__) */

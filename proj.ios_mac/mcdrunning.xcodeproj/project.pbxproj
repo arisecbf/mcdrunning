@@ -64,6 +64,10 @@
 		B510AF3D1B1C9170001C1108 /* animations in Resources */ = {isa = PBXBuildFile; fileRef = B510AF3C1B1C9170001C1108 /* animations */; };
 		B541E6111B37F25000B926F3 /* GoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E60F1B37F25000B926F3 /* GoldLayer.cpp */; };
 		B541E6121B37F25000B926F3 /* GoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E60F1B37F25000B926F3 /* GoldLayer.cpp */; };
+		B541E6151B3811B000B926F3 /* BuyGoldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6131B3811B000B926F3 /* BuyGoldScene.cpp */; };
+		B541E6161B3811B000B926F3 /* BuyGoldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6131B3811B000B926F3 /* BuyGoldScene.cpp */; };
+		B541E6191B3811F800B926F3 /* TRBaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6171B3811F800B926F3 /* TRBaseScene.cpp */; };
+		B541E61A1B3811F800B926F3 /* TRBaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6171B3811F800B926F3 /* TRBaseScene.cpp */; };
 		B575439D1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */; };
 		B575439E1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */; };
 		B57543A21B1A06CB00DD98D9 /* message.json in Resources */ = {isa = PBXBuildFile; fileRef = B57543A11B1A06CB00DD98D9 /* message.json */; };
@@ -188,6 +192,11 @@
 		B510AF3C1B1C9170001C1108 /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations; sourceTree = "<group>"; };
 		B541E60F1B37F25000B926F3 /* GoldLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GoldLayer.cpp; sourceTree = "<group>"; };
 		B541E6101B37F25000B926F3 /* GoldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoldLayer.h; sourceTree = "<group>"; };
+		B541E6131B3811B000B926F3 /* BuyGoldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BuyGoldScene.cpp; sourceTree = "<group>"; };
+		B541E6141B3811B000B926F3 /* BuyGoldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyGoldScene.h; sourceTree = "<group>"; };
+		B541E6171B3811F800B926F3 /* TRBaseScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TRBaseScene.cpp; sourceTree = "<group>"; };
+		B541E6181B3811F800B926F3 /* TRBaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRBaseScene.h; sourceTree = "<group>"; };
+		B541E61C1B38195100B926F3 /* uiconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiconf.h; sourceTree = "<group>"; };
 		B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogoScene.cpp; sourceTree = "<group>"; };
 		B575439C1B1A02AC00DD98D9 /* LogoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoScene.h; sourceTree = "<group>"; };
 		B575439F1B1A033700DD98D9 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -375,8 +384,6 @@
 				B57543B01B1A270300DD98D9 /* LoginScene.h */,
 				B57543B41B1AB95E00DD98D9 /* StartScene.cpp */,
 				B57543B51B1AB95E00DD98D9 /* StartScene.h */,
-				B57543B71B1ABA2F00DD98D9 /* McdLayer.cpp */,
-				B57543B81B1ABA2F00DD98D9 /* McdLayer.h */,
 				B57543BB1B1ACB3D00DD98D9 /* RoleSelectScene.cpp */,
 				B57543BC1B1ACB3D00DD98D9 /* RoleSelectScene.h */,
 				B57543C01B1B120600DD98D9 /* GameScene.cpp */,
@@ -444,8 +451,15 @@
 		B541E60E1B37F21300B926F3 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				B57543B71B1ABA2F00DD98D9 /* McdLayer.cpp */,
+				B57543B81B1ABA2F00DD98D9 /* McdLayer.h */,
 				B541E60F1B37F25000B926F3 /* GoldLayer.cpp */,
 				B541E6101B37F25000B926F3 /* GoldLayer.h */,
+				B541E6131B3811B000B926F3 /* BuyGoldScene.cpp */,
+				B541E6141B3811B000B926F3 /* BuyGoldScene.h */,
+				B541E6171B3811F800B926F3 /* TRBaseScene.cpp */,
+				B541E6181B3811F800B926F3 /* TRBaseScene.h */,
+				B541E61C1B38195100B926F3 /* uiconf.h */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -610,6 +624,8 @@
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B57543B91B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
 				B575439D1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */,
+				B541E6151B3811B000B926F3 /* BuyGoldScene.cpp in Sources */,
+				B541E6191B3811F800B926F3 /* TRBaseScene.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				B5F63CE01B36F7A000404E68 /* format.cc in Sources */,
 				B57543BD1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
@@ -632,12 +648,14 @@
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B5B5363C1B333CB40088AE74 /* GameState.cpp in Sources */,
 				B575439E1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */,
+				B541E61A1B3811F800B926F3 /* TRBaseScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				B5F63CDD1B36DDB500404E68 /* urlencode.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				B5F63CE11B36F7A000404E68 /* format.cc in Sources */,
 				B5B536321B32A4A20088AE74 /* ServerConn.cpp in Sources */,
 				B5B536381B32F7FD0088AE74 /* base64.cpp in Sources */,
+				B541E6161B3811B000B926F3 /* BuyGoldScene.cpp in Sources */,
 				B57543BA1B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
 				B57543C31B1B120600DD98D9 /* GameScene.cpp in Sources */,
 				B541E6121B37F25000B926F3 /* GoldLayer.cpp in Sources */,

@@ -19,6 +19,8 @@ public:
     virtual bool init() override;
     CREATE_FUNC(GoldLayer);
 
+    virtual bool init(bool hasBtn);
+    static GoldLayer* create(bool hasBtn);
     // 更新金币数量
     void updateGold(float dt);
 

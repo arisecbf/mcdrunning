@@ -11,6 +11,7 @@
 #include "GameState.h"
 #include <cstdlib>
 #include "SimpleAudioEngine.h"
+#include "BuyGoldScene.h"
 
 USING_NS_CC;
 
@@ -21,11 +22,21 @@ static const float gold_ani_check_interval = 0.15f;
 
 bool GoldLayer::init()
 {
+    return init(true);
+}
+
+bool GoldLayer::init(bool hasBtn)
+{
     assert(McdLayer::init());
 
     _goldDisp = GameState::g()->getGold();
 
-    decorateButton(add_btn_info, 102);
+    auto sp = Sprite::create("images/gold_icon.png");
+    sp->setPosition(genPos({0.58, 0.9}));
+    sp->setScale(0.4f);
+    this->addChild(sp);
+
+    if (hasBtn) decorateButton(add_btn_info, 102);
 
     auto goldStr = fmt::sprintf("%d", _goldDisp);
 
@@ -39,10 +50,22 @@ bool GoldLayer::init()
     return true;
 }
 
+GoldLayer* GoldLayer::create(bool hasBtn)
+{
+    auto ret = new GoldLayer();
+    if (ret && ret->init(hasBtn)) {
+        ret->autorelease();
+        return ret;
+    }
+    CC_SAFE_DELETE(ret);
+    return nullptr;
+}
+
 void GoldLayer::onButtonClick(int tag)
 {
     CCLOG("add gold click");
-    GameState::g()->setGold(rand()%1000);
+//    GameState::g()->setGold(rand()%1000);
+    Director::getInstance()->replaceScene(BuyGoldScene::create());
 }
 
 void GoldLayer::updateGold(float dt)
