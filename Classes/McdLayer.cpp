@@ -8,6 +8,7 @@
 
 #include "McdLayer.h"
 #include "SimpleAudioEngine.h"
+#include "uiconf.h"
 USING_NS_CC;
 
 bool McdLayer::init()
@@ -35,11 +36,14 @@ ui::Button* McdLayer::decorateButton(const Btn_info& btnInfo , int tag)
     button->setTag(tag);
     button->addTouchEventListener(CC_CALLBACK_2(McdLayer::touchEvent, this));
     button->setScale(btnInfo.scale);
+    button->setTitleText(btnInfo.text);
+    button->setTitleFontName(uic::font_zh);
+    button->setTitleFontSize(30);
     this->addChild(button, 1);
     return button;
 }
 
-void McdLayer::decorateButtonEx(const Btn_info& btnInfo, BTN_CALLBACK callback){
+ui::Button* McdLayer::decorateButtonEx(const Btn_info& btnInfo, BTN_CALLBACK callback){
     auto button = ui::Button::create(btnInfo.img, btnInfo.img_p);
     button->setPressedActionEnabled(true);
     button->setPosition(genPos(btnInfo.pos));
@@ -47,8 +51,12 @@ void McdLayer::decorateButtonEx(const Btn_info& btnInfo, BTN_CALLBACK callback){
     button->setTag(mytag);
     button->addTouchEventListener(CC_CALLBACK_2(McdLayer::touchEvent, this));
     button->setScale(btnInfo.scale);
+    button->setTitleText(btnInfo.text);
+    button->setTitleFontName(uic::font_zh);
+    button->setTitleFontSize(30);
     this->addChild(button, 1);
     _cbMap[mytag] = callback;
+    return button;
 }
 
 void McdLayer::touchEvent(Ref *pSender, cocos2d::ui::Widget::TouchEventType type){

@@ -1,3 +1,11 @@
 {
-	"welcome":"欢迎！"
+    "welcome":"欢迎！",
+    "back":"返回",
+    "comfirm":"确认",
+    "cancel":"取消",
+
+    "unlock":"解锁",
+    "select":"选择",
+    "next":"下一个",
+    "prev":"上一个"
 }

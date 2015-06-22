@@ -36,7 +36,7 @@
 class Msg
 {
 public:
-    static Msg& get(){
+    static Msg& s(){
         return _instance;
     }
 
@@ -53,33 +53,21 @@ private:
     Msg(){};
     static Msg _instance;
     bool _loaded = false;
-    rapidjson::Document _doc;
+    rjson::Document _doc;
 
     void load(){
         _loaded = true;
         std::ifstream fin;
-        fin.open("message.json", std::ios::in);
-        assert(fin.is_open());
-
-        // get size
-        auto pos_beg = fin.tellg();
-        fin.seekg(0, std::ios::end);
-        auto size = fin.tellg() - pos_beg;
-        std::cout << "size = " << size <<std::endl;
-        fin.seekg(0, std::ios::beg);
-
-        std::string json_raw;
-        json_raw.reserve(size);
-
-        // read in
-        std::string str;
-        while (fin.good()) {
-            getline(fin, str);
-            json_raw.append(str);
+        auto data = cocos2d::FileUtils::getInstance()->getDataFromFile("message.json");
+        unsigned char * pc = (unsigned char *)malloc(sizeof(unsigned char) * (data.getSize() + 1));
+        for (int i = 0; i < data.getSize(); i++) {
+            pc[i] = data.getBytes()[i];
         }
+        pc[data.getSize()] = '\0';
 
-        _doc.Parse(json_raw.c_str());
-        fin.close();
+        _doc.Parse((char*)pc);
+
+        free(pc);
     }
 };
 

@@ -68,6 +68,12 @@
 		B541E6161B3811B000B926F3 /* BuyGoldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6131B3811B000B926F3 /* BuyGoldScene.cpp */; };
 		B541E6191B3811F800B926F3 /* TRBaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6171B3811F800B926F3 /* TRBaseScene.cpp */; };
 		B541E61A1B3811F800B926F3 /* TRBaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6171B3811F800B926F3 /* TRBaseScene.cpp */; };
+		B541E61F1B3847EF00B926F3 /* CharacterScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E61D1B3847EF00B926F3 /* CharacterScene.cpp */; };
+		B541E6201B3847EF00B926F3 /* CharacterScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E61D1B3847EF00B926F3 /* CharacterScene.cpp */; };
+		B541E6231B384AA200B926F3 /* Msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6211B384AA200B926F3 /* Msg.cpp */; };
+		B541E6241B384AA200B926F3 /* Msg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6211B384AA200B926F3 /* Msg.cpp */; };
+		B541E6261B3856F100B926F3 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = B541E6251B3856F100B926F3 /* characters.json */; };
+		B541E6271B3856F100B926F3 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = B541E6251B3856F100B926F3 /* characters.json */; };
 		B575439D1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */; };
 		B575439E1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */; };
 		B57543A21B1A06CB00DD98D9 /* message.json in Resources */ = {isa = PBXBuildFile; fileRef = B57543A11B1A06CB00DD98D9 /* message.json */; };
@@ -197,6 +203,11 @@
 		B541E6171B3811F800B926F3 /* TRBaseScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TRBaseScene.cpp; sourceTree = "<group>"; };
 		B541E6181B3811F800B926F3 /* TRBaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRBaseScene.h; sourceTree = "<group>"; };
 		B541E61C1B38195100B926F3 /* uiconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiconf.h; sourceTree = "<group>"; };
+		B541E61D1B3847EF00B926F3 /* CharacterScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterScene.cpp; sourceTree = "<group>"; };
+		B541E61E1B3847EF00B926F3 /* CharacterScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterScene.h; sourceTree = "<group>"; };
+		B541E6211B384AA200B926F3 /* Msg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Msg.cpp; sourceTree = "<group>"; };
+		B541E6221B384AA200B926F3 /* Msg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Msg.h; sourceTree = "<group>"; };
+		B541E6251B3856F100B926F3 /* characters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters.json; sourceTree = "<group>"; };
 		B575439B1B1A02AC00DD98D9 /* LogoScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogoScene.cpp; sourceTree = "<group>"; };
 		B575439C1B1A02AC00DD98D9 /* LogoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoScene.h; sourceTree = "<group>"; };
 		B575439F1B1A033700DD98D9 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -351,12 +362,13 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B541E6251B3856F100B926F3 /* characters.json */,
+				B57543A11B1A06CB00DD98D9 /* message.json */,
 				B510AF3C1B1C9170001C1108 /* animations */,
 				B510AF381B1C8C7D001C1108 /* animation */,
 				B57543C61B1B19FF00DD98D9 /* 3d */,
 				B57543B21B1A2F6600DD98D9 /* sound */,
 				B57543AB1B1A100600DD98D9 /* images */,
-				B57543A11B1A06CB00DD98D9 /* message.json */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
 				46880B7619C43A67006E1F66 /* CloseNormal.png */,
@@ -370,6 +382,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B541E6211B384AA200B926F3 /* Msg.cpp */,
+				B541E6221B384AA200B926F3 /* Msg.h */,
 				B541E60E1B37F21300B926F3 /* ui */,
 				B5F63CDE1B36F7A000404E68 /* format.cc */,
 				B5F63CDF1B36F7A000404E68 /* format.h */,
@@ -384,8 +398,6 @@
 				B57543B01B1A270300DD98D9 /* LoginScene.h */,
 				B57543B41B1AB95E00DD98D9 /* StartScene.cpp */,
 				B57543B51B1AB95E00DD98D9 /* StartScene.h */,
-				B57543BB1B1ACB3D00DD98D9 /* RoleSelectScene.cpp */,
-				B57543BC1B1ACB3D00DD98D9 /* RoleSelectScene.h */,
 				B57543C01B1B120600DD98D9 /* GameScene.cpp */,
 				B57543C11B1B120600DD98D9 /* GameScene.h */,
 				B5B5362F1B32A4A20088AE74 /* ServerConn.cpp */,
@@ -460,6 +472,10 @@
 				B541E6171B3811F800B926F3 /* TRBaseScene.cpp */,
 				B541E6181B3811F800B926F3 /* TRBaseScene.h */,
 				B541E61C1B38195100B926F3 /* uiconf.h */,
+				B57543BB1B1ACB3D00DD98D9 /* RoleSelectScene.cpp */,
+				B57543BC1B1ACB3D00DD98D9 /* RoleSelectScene.h */,
+				B541E61D1B3847EF00B926F3 /* CharacterScene.cpp */,
+				B541E61E1B3847EF00B926F3 /* CharacterScene.h */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -567,6 +583,7 @@
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				B541E6261B3856F100B926F3 /* characters.json in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
@@ -603,6 +620,7 @@
 				B57543C81B1B19FF00DD98D9 /* 3d in Resources */,
 				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
 				B57543AD1B1A100600DD98D9 /* images in Resources */,
+				B541E6271B3856F100B926F3 /* characters.json in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
@@ -625,6 +643,7 @@
 				B57543B91B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
 				B575439D1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */,
 				B541E6151B3811B000B926F3 /* BuyGoldScene.cpp in Sources */,
+				B541E61F1B3847EF00B926F3 /* CharacterScene.cpp in Sources */,
 				B541E6191B3811F800B926F3 /* TRBaseScene.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				B5F63CE01B36F7A000404E68 /* format.cc in Sources */,
@@ -633,6 +652,7 @@
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				B5B536371B32F7FD0088AE74 /* base64.cpp in Sources */,
 				B5B536311B32A4A20088AE74 /* ServerConn.cpp in Sources */,
+				B541E6231B384AA200B926F3 /* Msg.cpp in Sources */,
 				B57543B11B1A270300DD98D9 /* LoginScene.cpp in Sources */,
 				B5B5363B1B333CB40088AE74 /* GameState.cpp in Sources */,
 				B57543C21B1B120600DD98D9 /* GameScene.cpp in Sources */,
@@ -647,6 +667,7 @@
 			files = (
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B5B5363C1B333CB40088AE74 /* GameState.cpp in Sources */,
+				B541E6241B384AA200B926F3 /* Msg.cpp in Sources */,
 				B575439E1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */,
 				B541E61A1B3811F800B926F3 /* TRBaseScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
@@ -659,6 +680,7 @@
 				B57543BA1B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
 				B57543C31B1B120600DD98D9 /* GameScene.cpp in Sources */,
 				B541E6121B37F25000B926F3 /* GoldLayer.cpp in Sources */,
+				B541E6201B3847EF00B926F3 /* CharacterScene.cpp in Sources */,
 				B57543BE1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

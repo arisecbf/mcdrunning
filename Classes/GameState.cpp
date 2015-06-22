@@ -34,6 +34,37 @@ GameState::GameState()
     std::srand((unsigned int)std::time(0));
 }
 
+void GameState::load()
+{
+    //character data
+    auto data = FileUtils::getInstance()->getDataFromFile("characters.json");
+    unsigned char* pc = (unsigned char*)malloc((data.getSize() + 1) * sizeof(unsigned char));
+    assert(pc != nullptr);
+    for (int i = 0; i < data.getSize(); i++) {
+        pc[i] = data.getBytes()[i];
+    }
+    pc[data.getSize()] = '\0';
+    rjson::Document doc;
+    doc.Parse((char*)pc);
+
+    assert(doc.HasMember("data"));
+    auto& list = doc["data"];
+    assert(list.IsArray());
+    for (rjson::SizeType i = 0; i < list.Size(); i++) {
+        auto& ch = list[i];
+        int id = ch["id"].GetInt();
+        int gold = ch["gold"].GetInt();
+        std::string title = ch["title"].GetString();
+        std::string desc = ch["desc"].GetString();
+        CCLOG("%d,%d,%s",id,gold,title.c_str());
+        _characterIds.push_back(id);
+        _characterMap[id] = {id, gold, title, desc};
+    }
+
+    free(pc);
+    pc = nullptr;
+}
+
 void GameState::newAccount(GS_CALL_BACK callback)
 {
     int tag = _cbMapIncrimentTag++;

@@ -24,6 +24,21 @@ public:
     Record(int i, int s):id(i),score(s){};
 };
 
+class Character
+{
+public:
+    int id = 0;
+    int gold = 0;
+    std::string title = "";
+    std::string desc = "";
+
+    // 其它属性
+    Character(){};
+
+    Character(int id, int gold, const std::string& title, const std::string& desc):
+        id(id), gold(gold), title(title), desc(desc){};
+};
+
 class GameState
 {
 public:
@@ -37,12 +52,15 @@ public:
     // Singleton access
     static GameState* g(){ return &_instance; };
     static GameState* k(){ return &_instance; };
+    static GameState* s(){ return &_instance; };
 
     // Store game state to file
     void store();
 
     // Recover game state from file
     void recover();
+
+    void load();
 
     void newAccount(GS_CALL_BACK callback);
 
@@ -58,7 +76,28 @@ public:
     int getGold(){return  _gold;};
     void setGold(int gold){_gold = gold;}
     void addGold(int gold){_gold += gold;}
-
+    std::vector<int> getCharacterIds(){return _characterIds;}
+    Character* getCharacter(int id){ return &(_characterMap[id]);};
+    int getSelectedCharacterId(){return _selectedCharId; };
+    bool isIdUnlock(int id){
+        for (auto idd : _unlockedCharacterIds) {
+            if (idd == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+    void setSelectedCharacterId(int id){_selectedCharId = id;};
+    bool unlockCharacterId(int id){
+        int gold = getCharacter(id)->gold;
+        if (gold >= _gold) {
+            return false;
+        } else {
+            _gold -= gold;
+            _unlockedCharacterIds.push_back(id);
+            return true;
+        }
+    }
 private:
     int _id;
     std::string _idString;
@@ -79,6 +118,10 @@ private:
 
     // pure local data
     int _gold = 999;
+    std::vector<int> _unlockedCharacterIds = {0};
+    std::vector<int> _characterIds;
+    std::unordered_map<int, Character> _characterMap;
+    int _selectedCharId = 0;
 };
 
 #endif /* defined(__mcdrunning__GameState__) */

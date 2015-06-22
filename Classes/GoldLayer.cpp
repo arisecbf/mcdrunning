@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include "SimpleAudioEngine.h"
 #include "BuyGoldScene.h"
+#include "uiconf.h"
 
 USING_NS_CC;
 
@@ -40,7 +41,7 @@ bool GoldLayer::init(bool hasBtn)
 
     auto goldStr = fmt::sprintf("%d", _goldDisp);
 
-    _lb = Label::createWithTTF("999", "fonts/caton.ttf", 60);
+    _lb = Label::createWithTTF(fmt::sprintf("%d", GameState::s()->getGold()), uic::font_en, 60);
     _lb->setColor(Color3B::YELLOW);
     _lb->setPosition(genPos({0.76,0.9}));
     this->addChild(_lb);

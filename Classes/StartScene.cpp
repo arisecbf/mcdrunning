@@ -14,6 +14,7 @@
 #include "ServerConn.h"
 #include "GameState.h"
 #include "GoldLayer.h"
+#include "CharacterScene.h"
 
 USING_NS_CC;
 
@@ -73,7 +74,7 @@ void StartScene::onButtonClick(int tag)
     switch (tag) {
         case BTN_ROLE:
             turnOut();
-            scheduleOnce([](float){Director::getInstance()->replaceScene(RoleSelectScene::createScene());}, config::default_turn_out_time, "ds");
+            scheduleOnce([](float){Director::getInstance()->replaceScene(CharacterScene::create());}, config::default_turn_out_time, "ds");
             break;
 
         case BTN_PLAY:

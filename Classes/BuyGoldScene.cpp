@@ -11,6 +11,7 @@
 #include "uiconf.h"
 #include "GoldLayer.h"
 #include "GameState.h"
+#include "StartScene.h"
 // 1000 金币售价 1 元,10000 金币售价 5 元,50000 金币售10元
 USING_NS_CC;
 
@@ -51,5 +52,7 @@ bool BuyGoldScene::init()
     _defaultLayer->decorateButtonEx({"images/gold_buy.png", "images/gold_buy.png", {0.8f,0.75f}, .5f}, [](){CCLOG("buy 1k"); GameState::k()->addGold(1000); });
     _defaultLayer->decorateButtonEx({"images/gold_buy.png", "images/gold_buy.png", {0.8f,0.5f}, .5f}, [](){CCLOG("buy 10k"); GameState::k()->addGold(10000); });
     _defaultLayer->decorateButtonEx({"images/gold_buy.png", "images/gold_buy.png", {0.8f,0.25f}, .5f}, [](){CCLOG("buy 50k"); GameState::k()->addGold(50000); });
+
+    addCommonBackBtn([](){Director::getInstance()->replaceScene(StartScene::createScene());});
     return  true;
 }

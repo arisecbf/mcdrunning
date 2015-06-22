@@ -10,6 +10,8 @@
 #include "Common.h"
 #include "LoginScene.h"
 #include "StartScene.h"
+#include "GameState.h"
+#include <thread>
 
 #include <vector>
 
@@ -69,6 +71,16 @@ bool LogoScene::init()
     }
 
     scheduleOnce([&delaySum](float){Director::getInstance()->replaceScene(StartScene::createScene());},delaySum, "login_scene");
+
+    // load data in another thread
+    auto loadFunc = [](){
+        CCLOG("load start");
+        GameState::s()->load();
+        CCLOG("load end");
+    };
+
+//    std::thread t {loadFunc};
+    loadFunc();
 
     return true;
 }
