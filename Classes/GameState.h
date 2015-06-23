@@ -139,6 +139,8 @@ public:
         assert(type < Prop::TMAX && type >= 0);
         return &_propMap[type];
     }
+    int getSpeedBarLength(){return _speedBarLength;}
+    void setSpeedBarLength(int len){ assert(len >= 60 && len <= 100); _speedBarLength = len;}
 private:
     int _id;
     std::string _idString;
@@ -164,6 +166,7 @@ private:
     std::unordered_map<int, Character> _characterMap;
     int _selectedCharId = 0;
     std::unordered_map<int, Prop> _propMap;
+    int _speedBarLength = 60;
 };
 
 #endif /* defined(__mcdrunning__GameState__) */

@@ -25,6 +25,7 @@ public:
 
     void addCommonBg();
     void addCommonBackBtn(COMMON_CALLBACK callback);
+    void addCommonLabel(const cocos2d::Vec2& pos, const std::string& text);
     cocos2d::ui::Button* addCommonBtn(const cocos2d::Vec2& pos, const std::string& text, COMMON_CALLBACK callback);
     cocos2d::Vec2 genPos(const cocos2d::Vec2& pos);
     cocos2d::Vec3 genPos3D(const cocos2d::Vec2& pos, float z);

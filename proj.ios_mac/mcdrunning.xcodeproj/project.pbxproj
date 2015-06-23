@@ -64,6 +64,12 @@
 		B510AF3D1B1C9170001C1108 /* animations in Resources */ = {isa = PBXBuildFile; fileRef = B510AF3C1B1C9170001C1108 /* animations */; };
 		B511915F1B38A0F700C2B134 /* PropScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B511915D1B38A0F700C2B134 /* PropScene.cpp */; };
 		B51191601B38A0F700C2B134 /* PropScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B511915D1B38A0F700C2B134 /* PropScene.cpp */; };
+		B51191631B392EC900C2B134 /* SpeedLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B51191611B392EC900C2B134 /* SpeedLayer.cpp */; };
+		B51191641B392EC900C2B134 /* SpeedLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B51191611B392EC900C2B134 /* SpeedLayer.cpp */; };
+		B51191671B3933AE00C2B134 /* WineScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B51191651B3933AE00C2B134 /* WineScene.cpp */; };
+		B51191681B3933AE00C2B134 /* WineScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B51191651B3933AE00C2B134 /* WineScene.cpp */; };
+		B511916B1B39462100C2B134 /* RunningScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B51191691B39462100C2B134 /* RunningScene.cpp */; };
+		B511916C1B39462100C2B134 /* RunningScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B51191691B39462100C2B134 /* RunningScene.cpp */; };
 		B541E6111B37F25000B926F3 /* GoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E60F1B37F25000B926F3 /* GoldLayer.cpp */; };
 		B541E6121B37F25000B926F3 /* GoldLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E60F1B37F25000B926F3 /* GoldLayer.cpp */; };
 		B541E6151B3811B000B926F3 /* BuyGoldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B541E6131B3811B000B926F3 /* BuyGoldScene.cpp */; };
@@ -200,6 +206,12 @@
 		B510AF3C1B1C9170001C1108 /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations; sourceTree = "<group>"; };
 		B511915D1B38A0F700C2B134 /* PropScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PropScene.cpp; sourceTree = "<group>"; };
 		B511915E1B38A0F700C2B134 /* PropScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropScene.h; sourceTree = "<group>"; };
+		B51191611B392EC900C2B134 /* SpeedLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpeedLayer.cpp; sourceTree = "<group>"; };
+		B51191621B392EC900C2B134 /* SpeedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedLayer.h; sourceTree = "<group>"; };
+		B51191651B3933AE00C2B134 /* WineScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WineScene.cpp; sourceTree = "<group>"; };
+		B51191661B3933AE00C2B134 /* WineScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WineScene.h; sourceTree = "<group>"; };
+		B51191691B39462100C2B134 /* RunningScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RunningScene.cpp; sourceTree = "<group>"; };
+		B511916A1B39462100C2B134 /* RunningScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningScene.h; sourceTree = "<group>"; };
 		B541E60F1B37F25000B926F3 /* GoldLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GoldLayer.cpp; sourceTree = "<group>"; };
 		B541E6101B37F25000B926F3 /* GoldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoldLayer.h; sourceTree = "<group>"; };
 		B541E6131B3811B000B926F3 /* BuyGoldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BuyGoldScene.cpp; sourceTree = "<group>"; };
@@ -402,8 +414,6 @@
 				B57543B01B1A270300DD98D9 /* LoginScene.h */,
 				B57543B41B1AB95E00DD98D9 /* StartScene.cpp */,
 				B57543B51B1AB95E00DD98D9 /* StartScene.h */,
-				B57543C01B1B120600DD98D9 /* GameScene.cpp */,
-				B57543C11B1B120600DD98D9 /* GameScene.h */,
 				B5B5362F1B32A4A20088AE74 /* ServerConn.cpp */,
 				B5B536301B32A4A20088AE74 /* ServerConn.h */,
 				B5B536351B32F7FD0088AE74 /* base64.cpp */,
@@ -482,6 +492,14 @@
 				B541E61E1B3847EF00B926F3 /* CharacterScene.h */,
 				B511915D1B38A0F700C2B134 /* PropScene.cpp */,
 				B511915E1B38A0F700C2B134 /* PropScene.h */,
+				B51191611B392EC900C2B134 /* SpeedLayer.cpp */,
+				B51191621B392EC900C2B134 /* SpeedLayer.h */,
+				B51191651B3933AE00C2B134 /* WineScene.cpp */,
+				B51191661B3933AE00C2B134 /* WineScene.h */,
+				B57543C01B1B120600DD98D9 /* GameScene.cpp */,
+				B57543C11B1B120600DD98D9 /* GameScene.h */,
+				B51191691B39462100C2B134 /* RunningScene.cpp */,
+				B511916A1B39462100C2B134 /* RunningScene.h */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -658,10 +676,13 @@
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				B511915F1B38A0F700C2B134 /* PropScene.cpp in Sources */,
 				B5B536371B32F7FD0088AE74 /* base64.cpp in Sources */,
+				B51191671B3933AE00C2B134 /* WineScene.cpp in Sources */,
 				B5B536311B32A4A20088AE74 /* ServerConn.cpp in Sources */,
 				B541E6231B384AA200B926F3 /* Msg.cpp in Sources */,
 				B57543B11B1A270300DD98D9 /* LoginScene.cpp in Sources */,
 				B5B5363B1B333CB40088AE74 /* GameState.cpp in Sources */,
+				B511916B1B39462100C2B134 /* RunningScene.cpp in Sources */,
+				B51191631B392EC900C2B134 /* SpeedLayer.cpp in Sources */,
 				B57543C21B1B120600DD98D9 /* GameScene.cpp in Sources */,
 				B541E6111B37F25000B926F3 /* GoldLayer.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
@@ -673,6 +694,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				B511916C1B39462100C2B134 /* RunningScene.cpp in Sources */,
 				B51191601B38A0F700C2B134 /* PropScene.cpp in Sources */,
 				B5B5363C1B333CB40088AE74 /* GameState.cpp in Sources */,
 				B541E6241B384AA200B926F3 /* Msg.cpp in Sources */,
@@ -680,6 +702,7 @@
 				B541E61A1B3811F800B926F3 /* TRBaseScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				B5F63CDD1B36DDB500404E68 /* urlencode.cpp in Sources */,
+				B51191641B392EC900C2B134 /* SpeedLayer.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				B5F63CE11B36F7A000404E68 /* format.cc in Sources */,
 				B5B536321B32A4A20088AE74 /* ServerConn.cpp in Sources */,
@@ -690,6 +713,7 @@
 				B541E6121B37F25000B926F3 /* GoldLayer.cpp in Sources */,
 				B541E6201B3847EF00B926F3 /* CharacterScene.cpp in Sources */,
 				B57543BE1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
+				B51191681B3933AE00C2B134 /* WineScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

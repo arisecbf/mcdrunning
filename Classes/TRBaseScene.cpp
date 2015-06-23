@@ -7,6 +7,7 @@
 //
 
 #include "TRBaseScene.h"
+#include "uiconf.h"
 
 USING_NS_CC;
 
@@ -44,6 +45,12 @@ ui::Button* TRBaseScene::addCommonBtn(const Vec2& pos, const std::string& text, 
                                     [this,tag](){this->_cbMap[tag]();});
 }
 
+void TRBaseScene::addCommonLabel(const cocos2d::Vec2 &pos, const std::string &text)
+{
+    auto lb = Label::createWithTTF(text, uic::font_zh, 25);
+    lb->setPosition(genPos(pos));
+    _defaultLayer->addChild(lb);
+}
 
 
 cocos2d::Vec2 TRBaseScene::genPos(const cocos2d::Vec2& pos)

@@ -16,6 +16,8 @@
 #include "GoldLayer.h"
 #include "CharacterScene.h"
 #include "PropScene.h"
+#include "WineScene.h"
+#include "RunningScene.h"
 
 USING_NS_CC;
 
@@ -80,7 +82,7 @@ void StartScene::onButtonClick(int tag)
 
         case BTN_PLAY:
             turnOut();
-            scheduleOnce([](float){Director::getInstance()->replaceScene(GameScene::create());}, config::default_turn_out_time, "ds2");
+            scheduleOnce([](float){Director::getInstance()->replaceScene(RunningScene::create());}, config::default_turn_out_time, "ds2");
             break;
 
         case BTN_COIN:{
@@ -90,7 +92,8 @@ void StartScene::onButtonClick(int tag)
             break;
 
         case BTN_DRINK:
-            tr::test();
+            turnOut();
+            scheduleOnce([](float){Director::getInstance()->replaceScene(WineScene::create());}, config::default_turn_out_time, "ds4");
             break;
 
         case BTN_ASSET:
