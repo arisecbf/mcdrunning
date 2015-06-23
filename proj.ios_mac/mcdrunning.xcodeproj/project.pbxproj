@@ -108,8 +108,6 @@
 		B5B536381B32F7FD0088AE74 /* base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B536351B32F7FD0088AE74 /* base64.cpp */; };
 		B5B5363B1B333CB40088AE74 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B536391B333CB40088AE74 /* GameState.cpp */; };
 		B5B5363C1B333CB40088AE74 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B536391B333CB40088AE74 /* GameState.cpp */; };
-		B5F63CDC1B36DDB500404E68 /* urlencode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5F63CDA1B36DDB500404E68 /* urlencode.cpp */; };
-		B5F63CDD1B36DDB500404E68 /* urlencode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5F63CDA1B36DDB500404E68 /* urlencode.cpp */; };
 		B5F63CE01B36F7A000404E68 /* format.cc in Sources */ = {isa = PBXBuildFile; fileRef = B5F63CDE1B36F7A000404E68 /* format.cc */; };
 		B5F63CE11B36F7A000404E68 /* format.cc in Sources */ = {isa = PBXBuildFile; fileRef = B5F63CDE1B36F7A000404E68 /* format.cc */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
@@ -252,8 +250,6 @@
 		B5B536361B32F7FD0088AE74 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 		B5B536391B333CB40088AE74 /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
 		B5B5363A1B333CB40088AE74 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
-		B5F63CDA1B36DDB500404E68 /* urlencode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = urlencode.cpp; sourceTree = "<group>"; };
-		B5F63CDB1B36DDB500404E68 /* urlencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = urlencode.h; sourceTree = "<group>"; };
 		B5F63CDE1B36F7A000404E68 /* format.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = format.cc; sourceTree = "<group>"; };
 		B5F63CDF1B36F7A000404E68 /* format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = format.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -424,8 +420,6 @@
 				B5B536361B32F7FD0088AE74 /* base64.h */,
 				B5B536391B333CB40088AE74 /* GameState.cpp */,
 				B5B5363A1B333CB40088AE74 /* GameState.h */,
-				B5F63CDA1B36DDB500404E68 /* urlencode.cpp */,
-				B5F63CDB1B36DDB500404E68 /* urlencode.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -667,7 +661,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F63CDC1B36DDB500404E68 /* urlencode.cpp in Sources */,
 				B57543B61B1AB95E00DD98D9 /* StartScene.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B57543B91B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
@@ -708,7 +701,6 @@
 				B575439E1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */,
 				B541E61A1B3811F800B926F3 /* TRBaseScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
-				B5F63CDD1B36DDB500404E68 /* urlencode.cpp in Sources */,
 				B51191641B392EC900C2B134 /* SpeedLayer.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				B5F63CE11B36F7A000404E68 /* format.cc in Sources */,

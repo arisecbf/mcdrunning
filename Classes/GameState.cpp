@@ -7,7 +7,6 @@
 //
 
 #include "GameState.h"
-#include "urlencode.h"
 #include "ServerConn.h"
 
 #include "../rapidjson/document.h"
@@ -94,8 +93,7 @@ void GameState::newAccount(GS_CALL_BACK callback)
     std::string postData = fmt::sprintf("{\"id_string\":\"%s\"}", _idString);
     CCLOG("%s", postData.c_str());
     auto dec = tr::encry(postData.c_str());
-    auto sendData = tr::UrlEncode(dec);
-    auto pdata = fmt::sprintf("p=%s", sendData);
+    auto pdata = fmt::sprintf("p=%s", dec);
     request->setRequestData(pdata.c_str(), pdata.size());
 
     request->setTag(tagStr.c_str());

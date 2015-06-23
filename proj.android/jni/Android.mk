@@ -10,17 +10,12 @@ LOCAL_MODULE := cocos2dcpp_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
-LOCAL_SRC_FILES := hellocpp/main.cpp \
-                   ../../Classes/AppDelegate.cpp \
-                   ../../Classes/HelloWorldScene.cpp \
-                   ../../Classes/GameScene.cpp \
-                   ../../Classes/LoginScene.cpp \
-                   ../../Classes/LogoScene.cpp \
-                   ../../Classes/McdLayer.cpp \
-                   ../../Classes/RoleSelectScene.cpp \
-                   ../../Classes/StartScene.cpp 
+MY_CPP_LIST := $(wildcard $(LOCAL_PATH)/hellocpp/*.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/*.cpp)
+LOCAL_SRC_FILES := $(MY_CPP_LIST:$(LOCAL_PATH)/%=%)
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
+    $(LOCAL_PATH)/../../aes
 
 # _COCOS_HEADER_ANDROID_BEGIN
 # _COCOS_HEADER_ANDROID_END

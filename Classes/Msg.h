@@ -11,6 +11,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include "cocos2d.h"
 
 #ifdef __APPLE__
 #include "../rapidjson/rapidjson.h"
