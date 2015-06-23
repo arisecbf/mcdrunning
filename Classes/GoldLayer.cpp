@@ -76,7 +76,7 @@ void GoldLayer::updateGold(float dt)
 
         // 小量的增减发生在游戏过程中，此时我们直接增加即可
         if (std::abs(_goldDisp - GameState::g()->getGold()) <= 10) {
-
+            _lb->setString(fmt::sprintf("%d", GameState::s()->getGold()));
             return;
         }
 

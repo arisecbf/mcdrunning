@@ -26,5 +26,7 @@
     "addWine":"增加酒量",
     "addWine_desc":"增加酒量会增加\n速度条长度，\n花费250金币。",
     "minusWine":"减少酒量",
-    "minusWine_desc":"减少酒量会减少\n速度条长度，\n系统会返还50金币。"
+    "minusWine_desc":"减少酒量会减少\n速度条长度，\n系统会返还50金币。",
+
+    "again":"重玩!"
 }

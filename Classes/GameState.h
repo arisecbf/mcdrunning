@@ -167,6 +167,7 @@ private:
     int _selectedCharId = 0;
     std::unordered_map<int, Prop> _propMap;
     int _speedBarLength = 60;
+    int _historyHightestScore = 100;
 };
 
 #endif /* defined(__mcdrunning__GameState__) */

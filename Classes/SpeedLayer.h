@@ -26,14 +26,15 @@ public:
         return nullptr;
     }
 
+    void setIndexPosition(float idex){ _indexPosition = idex;}
+    float getIndexPosition(){return _indexPosition;};
+
 private:
-    float _lowPart;
-    float _normalPart;
-    float _highPart;
-    float _indexPosition;
+    float _indexPosition = 0.5f;
 
     cocos2d::Sprite* _mainSp;
-    cocos2d::Sprite* _indexSp;
+    cocos2d::Sprite* _indexSp =nullptr;
+    void updateIndexPos();
 };
 
 #endif /* defined(__mcdrunning__SpeedLayer__) */

@@ -26,9 +26,25 @@ bool SpeedLayer::init(bool showIndexBar)
 
     auto updateFunc = [this](float dt){
         this->_mainSp->setScale(GameState::s()->getSpeedBarLength()*length2scale, 1.f);
+        updateIndexPos();
     };
 
-    schedule(updateFunc, 0.333f, kRepeatForever, 0, "spp");
+    schedule(updateFunc, 0.133f, kRepeatForever, 0, "spp");
+
+    if (showIndexBar) {
+        _indexSp = Sprite::create("images/speed_index.png");
+        _indexSp->setPositionY(_mainSp->getPositionY());
+        updateIndexPos();
+        this->addChild(_indexSp);
+    }
 
     return true;
+}
+
+void SpeedLayer::updateIndexPos()
+{
+    if (_indexSp) {
+        float width = _mainSp->getContentSize().width * _mainSp->getScaleX();
+        _indexSp->setPositionX(_mainSp->getPositionX() - 0.5f * width + _indexPosition * width);
+    }
 }

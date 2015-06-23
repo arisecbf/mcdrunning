@@ -14,6 +14,7 @@
 #include "GoldLayer.h"
 #include "StartScene.h"
 #include "SimpleAudioEngine.h"
+#include "ResultScene.h"
 
 USING_NS_CC;
 
@@ -23,7 +24,8 @@ bool RunningScene::init()
 
     addCommonBackBtn([](){Director::getInstance()->replaceScene(StartScene::createScene());});
     this->addChild(GoldLayer::create());
-    this->addChild(SpeedLayer::create(true));
+    _speedLayer = SpeedLayer::create(true);
+    this->addChild(_speedLayer);
 
     initGamePart();
     initUIPart();
@@ -41,11 +43,6 @@ void RunningScene::initGamePart()
     // 3D layer
     _3dGameLayer = Layer::create();
     this->addChild(_3dGameLayer, 1);
-
-    auto jb = Sprite3D::create("3d/jingbix.c3b");
-    jb->setScale(50.f);
-    jb->setPosition3D({0,0,0});
-    _3dGameLayer->addChild(jb, 1);
 
     // street
     _streets.reserve(_STREET_N_MAX);
@@ -93,7 +90,7 @@ void RunningScene::initGamePart()
         _isSpeeding += touches.size();
         for (int i = 0; i < touches.size(); i++) {
             auto th = touches[i];
-            this->checkPropClick(th->getLocationInView());
+            this->checkAssetClick(th->getLocationInView());
         }
     };
 
@@ -112,30 +109,55 @@ void RunningScene::initGamePart()
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    addCommonBtn({.5f, .1f}, "test", [this](){this->putPropInGame(0);});
+    addCommonBtn({.5f, .1f}, "test", [this](){
+        this->putAssetInGame(rand()%Asset::TMAX, rand()%Prop::TMAX);
+    });
 }
 
 void RunningScene::initUIPart()
 {
+    _2dUiLayer = Layer::create();
+    this->addChild(_2dUiLayer,100);
 
+    _lbSpeed = Label::createWithTTF("", uic::font_en, 30);
+    _lbSpeed->setPosition(genPos({0.1f, 0.7f}));
+    _2dUiLayer->addChild(_lbSpeed);
+
+    _lbRoad = Label::createWithTTF("", uic::font_en, 30);
+    _lbRoad->setPosition(genPos({0.1f, 0.65f}));
+    _2dUiLayer->addChild(_lbRoad);
 }
 
 static const int street_width = 20;
 
-void RunningScene::putPropInGame(int type)
+void RunningScene::putAssetInGame(int type, int propType)
 {
-    auto sp = Sprite3D::create("3d/milkx.c3b");
-    sp->setPosition3D({rand()%20 - .5f * street_width,0.f,_PROP_START_Z});
+    std::string meshFile;
+    assert(type >=0 && type < Asset::TMAX);
+    if (type == Asset::PROP){
+        assert(type >= 0 && type < Prop::TMAX);
+        meshFile = GameState::s()->getProp(propType)->getTitle();
+    } else {
+        meshFile = type == Asset::GOLD? "jingbi":
+        type == Asset::MONSTER? "monster":"";
+    }
+    meshFile = fmt::sprintf("3d/%sx.c3b", meshFile);
+
+    auto sp = Sprite3D::create(meshFile);
+    sp->setPosition3D({rand()%street_width - .5f * street_width,0.f,_PROP_START_Z});
     sp->setCameraMask((unsigned short)CameraFlag::USER1);
     sp->runAction(RepeatForever::create(RotateBy::create(2.f, {0,360,0})));
     _3dGameLayer->addChild(sp, 2);
-    _props.push_back(sp);
+
+    _assets.push_back({type, propType, sp});
 }
 
 
 void RunningScene::update(float dt)
 {
-    // 以_speed为核心的街道移动
+    // 物体移动以_speed为核心
+
+    // 街道移动
     float moveDistance = _speed * dt;
     for (int i = 0; i < _streets.size(); i++){
         auto street = _streets[i];
@@ -145,54 +167,111 @@ void RunningScene::update(float dt)
         }
     }
 
-    // 道具移动
-    for (auto iter = _props.begin(); iter != _props.end(); ) {
-        auto sp = *iter;
+    // asset移动
+    for (auto iter = _assets.begin(); iter != _assets.end(); ) {
+        auto sp = iter->sprite;
         sp->setPosition3D(sp->getPosition3D() - Vec3{0, 0, moveDistance});
         if (sp->getPosition3D().z < _STREET_Z_FAR) {
             _3dGameLayer->removeChild(sp);
-            iter = _props.erase(iter);
+            iter = _assets.erase(iter);
         } else {
             iter++;
         }
     }
 
-    //
+    // 速度条
+    float diffSpeedIndexMove = 0.f;
+    if (_isSpeeding > 0) {
+        diffSpeedIndexMove = genSpeedIndexRightSpeed() * dt;
+    } else {
+        diffSpeedIndexMove = 0.f - genSpeedIndexLeftSpeed() * dt;
+    }
+    _speedLayer->setIndexPosition(_speedLayer->getIndexPosition() + diffSpeedIndexMove);
+
+    // 速度
+    float diffSpeed = 0.f;
+    if (_speedLayer->getIndexPosition() < 0.333f) diffSpeed = 0.f - genAcceleterDown() * dt;
+    if (_speedLayer->getIndexPosition() > 0.666f) diffSpeed = genAcceleterUp() * dt;
+    _speed += diffSpeed;
+    _speed = std::max(_SPEED_MIN, _speed);
+    _highestSpeed = std::max(_speed, _highestSpeed);
+
+    // 里程
+    _loadLength += _speed * dt;
+
+    _lbRoad->setString(fmt::sprintf("%.3f", _loadLength));
+    _lbSpeed->setString(fmt::sprintf("%.3f", _speed));
+
+    // 检查失败
+    if (_speedLayer->getIndexPosition() >= 1.01f || _speedLayer->getIndexPosition() <= 0.00f) {
+
+        gameOver();
+    }
 }
 
-static const float TOUCH_SCOPE = 40*40; // 触摸点中阈值
+static const float TOUCH_SCOPE = 80*80; // 触摸点中阈值
 static bool checkIfTouchOn(const Vec2& a, const Vec2& b){
     auto diff = a - b;
     return TOUCH_SCOPE > diff.x * diff.x + diff.y * diff.y;
 }
-void RunningScene::checkPropClick(const cocos2d::Vec2& loc)
+void RunningScene::checkAssetClick(const cocos2d::Vec2& loc)
 {
     CCLOG("touch loc %f %f", loc.x, loc.y);
-    for (auto iter = _props.begin(); iter < _props.end();) {
-        auto propLoc = _3dCamera->project((*iter)->getPosition3D());
+    for (auto iter = _assets.begin(); iter < _assets.end();) {
+        auto propLoc = _3dCamera->project(iter->sprite->getPosition3D());
         CCLOG("prop %f %f", propLoc.x, propLoc.y);
         auto diff = loc - propLoc;
         if (TOUCH_SCOPE > diff.x*diff.x + diff.y*diff.y) {
             // 点中了，从vec删除，然后进行后续动画。
-            auto ap = *iter;
-            iter = _props.erase(iter);
-            dealPickedProp(ap);
+            auto asset = *iter;
+            iter = _assets.erase(iter);
+            dealPickedAsset(asset);
         } else {
             iter++;
         }
     }
 }
 
-void RunningScene::dealPickedProp(cocos2d::Sprite3D* sp)
+void RunningScene::dealPickedAsset(const Asset& asset)
 {
     // TODO，把类型信息放在sp的userdata里面。
 
     // sound
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/prop_pick.mp3");
 
+    // 放走mesh
     auto act = MoveTo::create(2.f, {0, 0, 200});
+    auto sp = asset.sprite;
     sp->runAction(act);
 
     scheduleOnce([this,sp](float dt){ this->_3dGameLayer->removeChild(sp); }, 2.2f, "sdfs");
+
+    // 逻辑处理
+    switch (asset.type) {
+        case Asset::GOLD:
+            GameState::s()->addGold(1);
+            _cntGold++;
+            break;
+
+        case Asset::MONSTER:
+            //TODO
+            CCLOG("monster pick");
+            _cntMonster++;
+            break;
+
+        case Asset::PROP:
+            //TODO
+            CCLOG("prop pick");
+            _cntProp++;
+            break;
+
+        default:
+            break;
+    }
+}
+
+void RunningScene::gameOver()
+{
+    Director::getInstance()->replaceScene(ResultScene::create(_loadLength, _cntProp, _cntMonster, _highestSpeed, _cntGold));
 }
 
