@@ -12,6 +12,7 @@
 #include "TRBaseScene.h"
 #include "cocos2d.h"
 #include <vector>
+#include "GameState.h"
 
 class RunningScene: public TRBaseScene
 {
@@ -37,6 +38,20 @@ private:
     cocos2d::Layer* _2dGameLayer;
     cocos2d::Layer* _3dUiLayer;
     cocos2d::Layer* _2dUiLayer;
+
+    cocos2d::Camera* _3dCamera;
+
+    // 道具
+    int _propEnableTimeLeft[Prop::TMAX] = {0};
+    std::vector<cocos2d::Sprite3D*> _props;
+    const float _PROP_START_Z = 1005;
+    void putPropInGame(int type);
+    void checkPropClick(const cocos2d::Vec2& loc);
+    void dealPickedProp(cocos2d::Sprite3D* sp);
+
+    // 加速条
+    int _isSpeeding = 0;
+
 
     void update(float dt)override;
 };
