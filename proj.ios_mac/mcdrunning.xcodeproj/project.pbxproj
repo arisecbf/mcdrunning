@@ -99,6 +99,7 @@
 		B57543C31B1B120600DD98D9 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B57543C01B1B120600DD98D9 /* GameScene.cpp */; };
 		B57543C71B1B19FF00DD98D9 /* 3d in Resources */ = {isa = PBXBuildFile; fileRef = B57543C61B1B19FF00DD98D9 /* 3d */; };
 		B57543C81B1B19FF00DD98D9 /* 3d in Resources */ = {isa = PBXBuildFile; fileRef = B57543C61B1B19FF00DD98D9 /* 3d */; };
+		B5A606F81B3ABC28008C9A52 /* format.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5A606F71B3ABC28008C9A52 /* format.cpp */; };
 		B5B0A4F11B39FE7B0097EBBD /* ResultScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B0A4EF1B39FE7B0097EBBD /* ResultScene.cpp */; };
 		B5B0A4F21B39FE7B0097EBBD /* ResultScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B0A4EF1B39FE7B0097EBBD /* ResultScene.cpp */; };
 		B5B536311B32A4A20088AE74 /* ServerConn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B5362F1B32A4A20088AE74 /* ServerConn.cpp */; };
@@ -108,8 +109,6 @@
 		B5B536381B32F7FD0088AE74 /* base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B536351B32F7FD0088AE74 /* base64.cpp */; };
 		B5B5363B1B333CB40088AE74 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B536391B333CB40088AE74 /* GameState.cpp */; };
 		B5B5363C1B333CB40088AE74 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5B536391B333CB40088AE74 /* GameState.cpp */; };
-		B5F63CE01B36F7A000404E68 /* format.cc in Sources */ = {isa = PBXBuildFile; fileRef = B5F63CDE1B36F7A000404E68 /* format.cc */; };
-		B5F63CE11B36F7A000404E68 /* format.cc in Sources */ = {isa = PBXBuildFile; fileRef = B5F63CDE1B36F7A000404E68 /* format.cc */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -241,6 +240,7 @@
 		B57543C01B1B120600DD98D9 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		B57543C11B1B120600DD98D9 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		B57543C61B1B19FF00DD98D9 /* 3d */ = {isa = PBXFileReference; lastKnownFileType = folder; path = 3d; sourceTree = "<group>"; };
+		B5A606F71B3ABC28008C9A52 /* format.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = format.cpp; sourceTree = "<group>"; };
 		B5B0A4EF1B39FE7B0097EBBD /* ResultScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultScene.cpp; sourceTree = "<group>"; };
 		B5B0A4F01B39FE7B0097EBBD /* ResultScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultScene.h; sourceTree = "<group>"; };
 		B5B5362F1B32A4A20088AE74 /* ServerConn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerConn.cpp; sourceTree = "<group>"; };
@@ -250,7 +250,6 @@
 		B5B536361B32F7FD0088AE74 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 		B5B536391B333CB40088AE74 /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
 		B5B5363A1B333CB40088AE74 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
-		B5F63CDE1B36F7A000404E68 /* format.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = format.cc; sourceTree = "<group>"; };
 		B5F63CDF1B36F7A000404E68 /* format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = format.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -398,10 +397,10 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B5A606F71B3ABC28008C9A52 /* format.cpp */,
 				B541E6211B384AA200B926F3 /* Msg.cpp */,
 				B541E6221B384AA200B926F3 /* Msg.h */,
 				B541E60E1B37F21300B926F3 /* ui */,
-				B5F63CDE1B36F7A000404E68 /* format.cc */,
 				B5F63CDF1B36F7A000404E68 /* format.h */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
@@ -664,13 +663,13 @@
 				B57543B61B1AB95E00DD98D9 /* StartScene.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B57543B91B1ABA2F00DD98D9 /* McdLayer.cpp in Sources */,
+				B5A606F81B3ABC28008C9A52 /* format.cpp in Sources */,
 				B575439D1B1A02AC00DD98D9 /* LogoScene.cpp in Sources */,
 				B541E6151B3811B000B926F3 /* BuyGoldScene.cpp in Sources */,
 				B541E61F1B3847EF00B926F3 /* CharacterScene.cpp in Sources */,
 				B5B0A4F11B39FE7B0097EBBD /* ResultScene.cpp in Sources */,
 				B541E6191B3811F800B926F3 /* TRBaseScene.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
-				B5F63CE01B36F7A000404E68 /* format.cc in Sources */,
 				B57543BD1B1ACB3D00DD98D9 /* RoleSelectScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -703,7 +702,6 @@
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				B51191641B392EC900C2B134 /* SpeedLayer.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
-				B5F63CE11B36F7A000404E68 /* format.cc in Sources */,
 				B5B536321B32A4A20088AE74 /* ServerConn.cpp in Sources */,
 				B5B536381B32F7FD0088AE74 /* base64.cpp in Sources */,
 				B541E6161B3811B000B926F3 /* BuyGoldScene.cpp in Sources */,

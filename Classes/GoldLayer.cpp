@@ -76,6 +76,7 @@ void GoldLayer::updateGold(float dt)
 
         // 小量的增减发生在游戏过程中，此时我们直接增加即可
         if (std::abs(_goldDisp - GameState::g()->getGold()) <= 10) {
+            _goldDisp = GameState::g()->getGold();
             _lb->setString(fmt::sprintf("%d", GameState::s()->getGold()));
             return;
         }
@@ -85,13 +86,15 @@ void GoldLayer::updateGold(float dt)
         _goldDisp = GameState::g()->getGold();
         _goldAniTo = _goldDisp;
         _goldAniIndex = 0;
-        auto anifunc = [&](float dt){
-            _goldAniIndex ++;
-            int showGold = _goldAniIndex *1.f/gold_ani_step_max * (_goldAniTo - _goldAniFrom) + _goldAniFrom;
-            if (_goldAniIndex >= (gold_ani_step_max-1) ) { showGold = _goldDisp;}
-            _lb->setString(fmt::sprintf("%d",showGold));
-        };
-        schedule(anifunc, 0.033, gold_ani_step_max, 0, "gold ani");
+        // 这段代码在android下会奔溃
+//        auto anifunc = [this](float dt){
+//            _goldAniIndex ++;
+//            int showGold = _goldAniIndex *1.f/gold_ani_step_max * (_goldAniTo - _goldAniFrom) + _goldAniFrom;
+//            if (_goldAniIndex >= (gold_ani_step_max-1) ) { showGold = _goldDisp;}
+//            _lb->setString(fmt::sprintf("%d",showGold));
+//        };
+//        schedule(anifunc, 0.033, gold_ani_step_max, 0, genKey());
+        _lb->setString(fmt::sprintf("%d", GameState::s()->getGold()));
         CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/gold_updown.mp3");
 
     }

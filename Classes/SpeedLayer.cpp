@@ -29,7 +29,7 @@ bool SpeedLayer::init(bool showIndexBar)
         updateIndexPos();
     };
 
-    schedule(updateFunc, 0.133f, kRepeatForever, 0, "spp");
+    schedule(updateFunc, 0.133f, kRepeatForever, 0, genKey());
 
     if (showIndexBar) {
         _indexSp = Sprite::create("images/speed_index.png");

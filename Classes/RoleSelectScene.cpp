@@ -94,7 +94,7 @@ void RoleSelectScene::onButtonClick(int tag)
 
         case BTN_BACK:
             turnOut();
-            scheduleOnce([](float){Director::getInstance()->replaceScene(StartScene::createScene());}, config::default_turn_out_time, "234");
+            scheduleOnce([](float){Director::getInstance()->replaceScene(StartScene::createScene());}, config::default_turn_out_time, genKey());
         default:
             break;
     }

@@ -58,10 +58,12 @@ protected:
     cocos2d::Vec2 genPos(const cocos2d::Vec2& pos);
     cocos2d::Vec3 genPos3D(const cocos2d::Vec2& pos, float z);
 
+    std::string genKey(); // generate an well key for schedule lambda
 private:
     std::vector<cocos2d::Node*> _inoutNodes;
     int _tagAI = 1000;
     std::unordered_map<int, BTN_CALLBACK> _cbMap;
+    static int _keyAi;
 };
 
 #endif /* defined(__mcdrunning__McdLayer__) */
