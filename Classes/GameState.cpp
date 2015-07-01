@@ -188,7 +188,7 @@ void GameState::recover()
 
     rjson::Document doc;
     doc.Parse(strdata.c_str());
-    _gold = doc["gold"].GetInt() + 1;
+    _gold = doc["gold"].GetInt();
     _propMap[Prop::MILK].level = doc["milk"].GetInt();
     _propMap[Prop::MAGNET].level = doc["magnet"].GetInt();
     _propMap[Prop::XO].level = doc["xo"].GetInt();
