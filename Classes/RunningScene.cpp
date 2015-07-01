@@ -152,7 +152,7 @@ void RunningScene::initUIPart()
     _2dUiLayer->addChild(_lbRoad);
 
     for (int i = 0; i < Prop::TMAX; i++) {
-        _lbPropTimeLeft[i] = Label::createWithTTF("123", uic::font_zh, 30);
+        _lbPropTimeLeft[i] = Label::createWithTTF("", uic::font_zh, 30);
         _lbPropTimeLeft[i]->setPosition(genPos({0.8f, 0.35f+0.09f*i}));
         _2dUiLayer->addChild(_lbPropTimeLeft[i]);
     }
