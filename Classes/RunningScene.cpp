@@ -24,6 +24,7 @@ bool RunningScene::init()
 {
     assert(TRBaseScene::init());
 
+    initAssetInfo();
     addCommonBackBtn([](){Director::getInstance()->replaceScene(StartScene::createScene());});
     this->addChild(GoldLayer::create());
     _speedLayer = SpeedLayer::create(true);
@@ -34,6 +35,18 @@ bool RunningScene::init()
 
     startCountDown();
     return true;
+}
+
+void RunningScene::initAssetInfo()
+{
+    for (int i = 0; i < Asset::TMAX; i++) {
+        _assetInfo[i].assetType = i;
+        _assetInfo[i].propType = 0;
+    }
+    for (int i = 0; i < Prop::TMAX; i++) {
+        _propInfo[i].assetType = Asset::PROP;
+        _propInfo[i].propType = i;
+    }
 }
 
 void RunningScene::initGamePart()
@@ -110,6 +123,19 @@ void RunningScene::initGamePart()
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+    // 左侧的道具栏
+    for (int i = 0; i < Prop::TMAX; i++) {
+        auto sp = genAssetSprite(Asset::PROP, i);
+        sp->setPosition3D(Vec3{13, 5.f*i, 950});
+        _3dGameLayer->addChild(sp);
+        sp->setVisible(false);
+        _spRightProps[i] = sp;
+    }
+
+    for (int i = 0; i < Prop::TMAX; i++) {
+        _propEnableTimeLeft[i] = 0.f;
+    }
+
 }
 
 void RunningScene::initUIPart()
@@ -132,8 +158,7 @@ void RunningScene::randomPutAssetInGame()
     putAssetInGame(rand()%Asset::TMAX, rand()%Prop::TMAX);
 }
 
-static const int street_width = 20;
-void RunningScene::putAssetInGame(int type, int propType)
+cocos2d::Sprite3D* RunningScene::genAssetSprite(int type, int propType)
 {
     std::string meshFile;
     assert(type >=0 && type < Asset::TMAX);
@@ -151,8 +176,21 @@ void RunningScene::putAssetInGame(int type, int propType)
 
     auto sp = Sprite3D::create(meshFile);
     sp->setScale(scale);
-    sp->setPosition3D({rand()%street_width - .5f * street_width,0.f,_PROP_START_Z});
+    if (type == Asset::PROP) {
+        sp->setUserData((void*)&_propInfo[propType]);
+    } else {
+        sp->setUserData((void*)&_assetInfo[type]);
+    }
+
     sp->setCameraMask((unsigned short)CameraFlag::USER1);
+    return sp;
+}
+
+static const int street_width = 20;
+void RunningScene::putAssetInGame(int type, int propType)
+{
+    auto sp = genAssetSprite(type, propType);
+    sp->setPosition3D({rand()%street_width - .5f * street_width,0.f,_PROP_START_Z});
     sp->runAction(RepeatForever::create(RotateBy::create(2.f, {0,360,0})));
     _3dGameLayer->addChild(sp, 2);
 
@@ -222,6 +260,26 @@ void RunningScene::update(float dt)
         _assetPutInterval = genNextPutInterval();
         _assetPutIntervalcost = 0.f;
     }
+
+    // 道具时间
+    for (int i = 0; i < Prop::TMAX; i++){
+        if (i == Prop::SHIELD) {
+            continue;
+        } else {
+            _propEnableTimeLeft[i] -= dt;
+            if (_propEnableTimeLeft[i] < 0.f) {
+                _propEnableTimeLeft[i] = 0.f;
+            }
+        }
+    }
+
+    for (int i = 0; i < Prop::TMAX; i++) {
+        if (_propEnableTimeLeft[i] > 0.f) {
+            _spRightProps[i]->setVisible(true);
+        } else {
+            _spRightProps[i]->setVisible(false);
+        }
+    }
 }
 
 static const float TOUCH_SCOPE = 80; // 触摸点中阈值
@@ -265,15 +323,20 @@ void RunningScene::checkAssetClick(const cocos2d::Vec2& loc)
 
 void RunningScene::dealPickedAsset(const Asset& asset)
 {
-    // TODO，把类型信息放在sp的userdata里面。
+    AssetInfo* info = (AssetInfo*)asset.sprite->getUserData();
 
     // sound
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/prop_pick.mp3");
 
     // 放走mesh
-    auto act = MoveTo::create(2.f, {0, 0, 200});
     auto sp = asset.sprite;
-    sp->runAction(act);
+    Vec3 dst = Vec3{sp->getPosition3D().x, sp->getPosition3D().y, 0};
+    if (info->assetType == Asset::PROP) {
+        dst = _spRightProps[info->propType]->getPosition3D();
+    }
+    auto act = MoveTo::create(0.5f, dst);
+    auto act2 = FadeOut::create(0.8f);
+    sp->runAction(Spawn::create(act, act2, NULL));
 
     scheduleOnce([this,sp](float dt){ this->_3dGameLayer->removeChild(sp); }, 2.2f, "sdfs");
 
@@ -291,15 +354,21 @@ void RunningScene::dealPickedAsset(const Asset& asset)
             break;
 
         case Asset::PROP:
-            //TODO
             CCLOG("prop pick");
             _cntProp++;
+            dealPickedProp(asset.propType);
             break;
 
         default:
             break;
     }
 }
+
+void RunningScene::dealPickedProp(int proptype)
+{
+    _propEnableTimeLeft[proptype] += genEnabelTime(proptype);
+}
+
 void RunningScene::gameStart()
 {
     _assetPutInterval = genNextPutInterval();

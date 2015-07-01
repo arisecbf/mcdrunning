@@ -32,6 +32,12 @@ public:
     Asset(int type, int propType, cocos2d::Sprite3D* sprite):type(type), propType(propType), sprite(sprite){};
 };
 
+struct AssetInfo
+{
+    int assetType;
+    int propType;
+};
+
 class RunningScene: public TRBaseScene
 {
 public:
@@ -65,18 +71,24 @@ private:
     cocos2d::Label* _lbRoad;
     cocos2d::Label* _lbSpeed;
 
-    //场景内物品
+    //场景内asset
     std::vector<Asset> _assets;
     void checkAssetClick(const cocos2d::Vec2& loc);
     void dealPickedAsset(const Asset& asset);
+    void dealPickedProp(int propType);
+    cocos2d::Sprite3D* genAssetSprite(int type, int propType);
     void putAssetInGame(int type, int propType);
     void randomPutAssetInGame();
     int _cntProp = 0;
     int _cntMonster = 0;
     int _cntGold = 0;
+    //用于在sprite3d的userdata中标识类型
+    AssetInfo _assetInfo[Asset::TMAX];
+    AssetInfo _propInfo[Prop::TMAX];
+    void initAssetInfo();
 
     // 道具
-    int _propEnableTimeLeft[Prop::TMAX] = {0};
+    float _propEnableTimeLeft[Prop::TMAX];
     std::vector<cocos2d::Sprite3D*> _props;
     const float _PROP_START_Z = 1005;
 
@@ -89,6 +101,7 @@ private:
     float genSpeedIndexLeftSpeed() { return .005f * _speed; }
     float genAcceleterUp() { return 1.f; } // 加速时的加速度每秒
     float genAcceleterDown() { return 1.f; }
+    float genEnabelTime(int propType){return 10.f;};
 
     // 放asset的控制状态
     float _assetPutInterval = 1.0f;
@@ -99,6 +112,9 @@ private:
     void startCountDown();
     void showCountDown(int count);
     cocos2d::Label* _lbCountDown;
+
+    // 右侧道具栏
+    cocos2d::Sprite3D* _spRightProps[Prop::TMAX];
 
 
     void update(float dt)override;
