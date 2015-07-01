@@ -55,6 +55,9 @@ private:
     const float _STREET_PER_LENGTH = 176.f;
     const float _STREET_Z_FAR = _STREET_Z_NEAR - _STREET_N_MAX * _STREET_PER_LENGTH;
 
+    const float _CHECK_AREA_NEAR_Z = 950;
+    const float _CHECK_AREA_FAR_Z = 900;
+
     const float _SPEED_MIN = 10.f;
     float _highestSpeed = _SPEED_MIN;
     float _speed = _SPEED_MIN; // Z方向移动每秒

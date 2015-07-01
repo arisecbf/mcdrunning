@@ -215,7 +215,32 @@ void RunningScene::update(float dt)
     // asset移动
     for (auto iter = _assets.begin(); iter != _assets.end(); ) {
         auto sp = iter->sprite;
+        Vec3 oldPos = sp->getPosition3D();
         sp->setPosition3D(sp->getPosition3D() - Vec3{0, 0, moveDistance});
+
+        // 逻辑
+        if (iter->type == Asset::GOLD && iter->sprite->getPosition3D().z < _CHECK_AREA_NEAR_Z && iter->sprite->getPosition3D().z > _CHECK_AREA_FAR_Z) {
+            // 自动捡金币
+            if (_propEnableTimeLeft[Prop::MAGNET] > 0.f) {
+                dealPickedAsset(*iter);
+                iter = _assets.erase(iter);
+                continue;
+            }
+        } else if (iter->type == Asset::MONSTER) {
+            if (iter->sprite->getPosition3D().z < _CHECK_AREA_FAR_Z && oldPos.z >= _CHECK_AREA_FAR_Z) {
+                // Monster hit role
+                if (_propEnableTimeLeft[Prop::XO] > 0.f) {
+                    //xo 无敌
+                } else if (_propEnableTimeLeft[Prop::SHIELD]) {
+                    //护盾防一次
+                    _propEnableTimeLeft[Prop::SHIELD] = 0.f;
+                } else {
+                    // gameover
+                    gameOver();
+                }
+            }
+        }
+
         if (sp->getPosition3D().z < _STREET_Z_FAR) {
             _3dGameLayer->removeChild(sp);
             iter = _assets.erase(iter);
