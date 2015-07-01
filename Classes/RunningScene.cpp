@@ -15,6 +15,7 @@
 #include "StartScene.h"
 #include "SimpleAudioEngine.h"
 #include "ResultScene.h"
+#include "Msg.h"
 
 USING_NS_CC;
 
@@ -141,9 +142,13 @@ void RunningScene::putAssetInGame(int type, int propType)
         meshFile = type == Asset::GOLD? "jingbi":
         type == Asset::MONSTER? "monster":"";
     }
+
+    float scale = Msg::s().getFloat(fmt::sprintf("scale_%s", meshFile));
+
     meshFile = fmt::sprintf("3d/%sx.c3b", meshFile);
 
     auto sp = Sprite3D::create(meshFile);
+    sp->setScale(scale);
     sp->setPosition3D({rand()%street_width - .5f * street_width,0.f,_PROP_START_Z});
     sp->setCameraMask((unsigned short)CameraFlag::USER1);
     sp->runAction(RepeatForever::create(RotateBy::create(2.f, {0,360,0})));

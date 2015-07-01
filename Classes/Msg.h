@@ -47,8 +47,12 @@ public:
         }
         return _doc[key.c_str()].GetString();
     }
-
-
+    float getFloat(const std::string& key){
+        if (!_loaded) {
+            load();
+        }
+        return _doc[key.c_str()].GetDouble();
+    }
 
 private:
     Msg(){};

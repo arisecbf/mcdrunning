@@ -17,7 +17,6 @@
 
 USING_NS_CC;
 
-
 Scene* LogoScene::createScene()
 {
     auto scene = Scene::create();
@@ -28,8 +27,6 @@ Scene* LogoScene::createScene()
 
     return scene;
 }
-
-
 
 bool LogoScene::init()
 {

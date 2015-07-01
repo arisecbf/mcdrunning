@@ -28,5 +28,14 @@
     "minusWine":"减少酒量",
     "minusWine_desc":"减少酒量会减少\n速度条长度，\n系统会返还50金币。",
 
-    "again":"重玩!"
+    "again":"重玩!",
+
+    "__comment___0":"下面是各个asset到scale",
+    "scale_milk":2.0,
+    "scale_jingbi":2.0,
+    "scale_redwine":1.0,
+    "scale_xo":0.5,
+    "scale_shield":0.5,
+    "scale_magnet":0.5,
+    "scale_monster":2.0
 }
