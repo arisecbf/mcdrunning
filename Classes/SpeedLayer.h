@@ -28,11 +28,13 @@ public:
 
     void setIndexPosition(float idex){ _indexPosition = idex;}
     float getIndexPosition(){return _indexPosition;};
+    void showAllGreen(bool isok);
 
 private:
     float _indexPosition = 0.5f;
 
     cocos2d::Sprite* _mainSp;
+    cocos2d::Sprite* _greenSp;//全加速
     cocos2d::Sprite* _indexSp =nullptr;
     void updateIndexPos();
 };

@@ -74,6 +74,19 @@ public:
     Prop():type(0),level(0){};
     Prop(int type, int level):
         type(type), level(level){};
+
+    float getEnableTime(){
+        switch (type) {
+            case REDWINE:
+            case MILK:
+            case XO:
+                return 3.f + 1.f*level;
+            case MAGNET:
+                return 5.f + 2.f*level;
+            default:
+                return  10.f;
+        }
+    }
 };
 
 class GameState

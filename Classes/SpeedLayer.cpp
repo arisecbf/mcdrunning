@@ -24,6 +24,12 @@ bool SpeedLayer::init(bool showIndexBar)
     this->addChild(mainSp);
     _mainSp = mainSp;
 
+    _greenSp = Sprite::create("images/speed_allgreen.png");
+    _greenSp->setPosition(_mainSp->getPosition());
+    _greenSp->setScale(GameState::s()->getSpeedBarLength()*length2scale, 1.f);
+    this->addChild(_greenSp);
+    _greenSp->setVisible(false);
+
     auto updateFunc = [this](float dt){
         this->_mainSp->setScale(GameState::s()->getSpeedBarLength()*length2scale, 1.f);
         updateIndexPos();
@@ -47,4 +53,10 @@ void SpeedLayer::updateIndexPos()
         float width = _mainSp->getContentSize().width * _mainSp->getScaleX();
         _indexSp->setPositionX(_mainSp->getPositionX() - 0.5f * width + _indexPosition * width);
     }
+}
+
+void SpeedLayer::showAllGreen(bool isok)
+{
+    _greenSp->setVisible(isok);
+    _mainSp->setVisible(!isok);
 }

@@ -36,6 +36,7 @@ struct AssetInfo
 {
     int assetType;
     int propType;
+    bool empty = false;
 };
 
 class RunningScene: public TRBaseScene
@@ -92,6 +93,7 @@ private:
 
     // 道具
     float _propEnableTimeLeft[Prop::TMAX];
+    cocos2d::Label* _lbPropTimeLeft[Prop::TMAX];
     std::vector<cocos2d::Sprite3D*> _props;
     const float _PROP_START_Z = 1005;
 
@@ -100,16 +102,29 @@ private:
     SpeedLayer* _speedLayer;
 
     // 动态参数
-    float genSpeedIndexRightSpeed() { return .005f * _speed; } // 当增加时指标右移动速度每秒
-    float genSpeedIndexLeftSpeed() { return .005f * _speed; }
+    float genSpeedIndexRightSpeed() {
+        float ret = .005f * _speed;
+        if (_propEnableTimeLeft[Prop::MILK] > 0.f) {
+            ret *= 0.5f;
+        }
+        return ret;
+    } // 当增加时指标右移动速度每秒
+    float genSpeedIndexLeftSpeed() {
+        float ret = .005f * _speed;
+        if (_propEnableTimeLeft[Prop::MILK] > 0.f) {
+            ret *= 0.5f;
+        }
+        return ret;
+    }
     float genAcceleterUp() { return 1.f; } // 加速时的加速度每秒
     float genAcceleterDown() { return 1.f; }
-    float genEnabelTime(int propType){return 10.f;};
+    float genEnabelTime(int propType);
 
     // 放asset的控制状态
     float _assetPutInterval = 1.0f;
     float _assetPutIntervalcost = 0.f;
     float genNextPutInterval();
+    AssetInfo genNextAsset();
 
     // 倒计时开始
     void startCountDown();

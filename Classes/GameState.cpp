@@ -160,3 +160,40 @@ void GameState::onHttpRequestCompleted(HttpClient *sender, HttpResponse *respons
     // callback
     callback(ERR_NONE);
 }
+
+void GameState::store()
+{
+    rjson::Document doc;
+    doc.SetObject();
+    doc.AddMember("gold", _gold, doc.GetAllocator());
+    doc.AddMember("milk", _propMap[Prop::MILK].level, doc.GetAllocator());
+    doc.AddMember("magnet", _propMap[Prop::MAGNET].level, doc.GetAllocator());
+    doc.AddMember("xo", _propMap[Prop::XO].level, doc.GetAllocator());
+    doc.AddMember("redwine", _propMap[Prop::REDWINE].level, doc.GetAllocator());
+    doc.AddMember("shield", 0, doc.GetAllocator());
+    doc.AddMember("speed_length", _speedBarLength, doc.GetAllocator());
+    rjson::StringBuffer buffer;
+    rjson::Writer<rjson::StringBuffer> writer(buffer);
+    doc.Accept(writer);
+
+    std::string strdata = buffer.GetString();
+
+    UserDefault::getInstance()->setStringForKey("data", strdata);
+}
+
+void GameState::recover()
+{
+    std::string strdata = UserDefault::getInstance()->getStringForKey("data");
+    if (strdata.size() <= 0) return;
+
+    rjson::Document doc;
+    doc.Parse(strdata.c_str());
+    _gold = doc["gold"].GetInt() + 1;
+    _propMap[Prop::MILK].level = doc["milk"].GetInt();
+    _propMap[Prop::MAGNET].level = doc["magnet"].GetInt();
+    _propMap[Prop::XO].level = doc["xo"].GetInt();
+    _propMap[Prop::REDWINE].level = doc["redwine"].GetInt();
+    _propMap[Prop::SHIELD].level = 0;
+
+    _speedBarLength = doc["speed_length"].GetInt();
+}

@@ -150,12 +150,21 @@ void RunningScene::initUIPart()
     _lbRoad = Label::createWithTTF("", uic::font_en, 30);
     _lbRoad->setPosition(genPos({0.1f, 0.65f}));
     _2dUiLayer->addChild(_lbRoad);
+
+    for (int i = 0; i < Prop::TMAX; i++) {
+        _lbPropTimeLeft[i] = Label::createWithTTF("123", uic::font_zh, 30);
+        _lbPropTimeLeft[i]->setPosition(genPos({0.8f, 0.35f+0.09f*i}));
+        _2dUiLayer->addChild(_lbPropTimeLeft[i]);
+    }
 }
 
 void RunningScene::randomPutAssetInGame()
 {
     // 在这里可以控制各asset的分配比例。
-    putAssetInGame(rand()%Asset::TMAX, rand()%Prop::TMAX);
+    AssetInfo info = genNextAsset();
+    if (!info.empty) {
+        putAssetInGame(info.assetType, info.propType);
+    }
 }
 
 cocos2d::Sprite3D* RunningScene::genAssetSprite(int type, int propType)
@@ -260,8 +269,9 @@ void RunningScene::update(float dt)
 
     // 速度
     float diffSpeed = 0.f;
-    if (_speedLayer->getIndexPosition() < 0.333f) diffSpeed = 0.f - genAcceleterDown() * dt;
-    if (_speedLayer->getIndexPosition() > 0.666f) diffSpeed = genAcceleterUp() * dt;
+
+    if (_speedLayer->getIndexPosition() > 0.666f || _propEnableTimeLeft[Prop::REDWINE] > 0.f) diffSpeed = genAcceleterUp() * dt;
+    else if (_speedLayer->getIndexPosition() < 0.333f) diffSpeed = 0.f - genAcceleterDown() * dt;
     _speed += diffSpeed;
     _speed = std::max(_SPEED_MIN, _speed);
     _highestSpeed = std::max(_speed, _highestSpeed);
@@ -269,8 +279,8 @@ void RunningScene::update(float dt)
     // 里程
     _loadLength += _speed * dt;
 
-    _lbRoad->setString(fmt::sprintf("%.3f", _loadLength));
-    _lbSpeed->setString(fmt::sprintf("%.3f", _speed));
+    _lbRoad->setString(fmt::sprintf("%.0f", _loadLength));
+    _lbSpeed->setString(fmt::sprintf("%.0f", _speed));
 
     // 检查失败
     if (_speedLayer->getIndexPosition() >= 1.01f || _speedLayer->getIndexPosition() <= 0.00f) {
@@ -295,6 +305,10 @@ void RunningScene::update(float dt)
             if (_propEnableTimeLeft[i] < 0.f) {
                 _propEnableTimeLeft[i] = 0.f;
             }
+            if (_propEnableTimeLeft[i] > 0.f) {
+            _lbPropTimeLeft[i]->setString(fmt::sprintf("%.1f", _propEnableTimeLeft[i]));
+            }
+            _lbPropTimeLeft[i]->setVisible(_propEnableTimeLeft[i] > 0.f);
         }
     }
 
@@ -305,6 +319,8 @@ void RunningScene::update(float dt)
             _spRightProps[i]->setVisible(false);
         }
     }
+
+    _speedLayer->showAllGreen(_propEnableTimeLeft[Prop::REDWINE] > 0.f);
 }
 
 static const float TOUCH_SCOPE = 80; // 触摸点中阈值
@@ -391,6 +407,9 @@ void RunningScene::dealPickedAsset(const Asset& asset)
 
 void RunningScene::dealPickedProp(int proptype)
 {
+    if (proptype == Prop::XO && _propEnableTimeLeft[Prop::XO] <= 0.f) {
+        _speed = _speed*2;
+    }
     _propEnableTimeLeft[proptype] += genEnabelTime(proptype);
 }
 
@@ -430,5 +449,41 @@ void RunningScene::showCountDown(int count)
     _lbCountDown->setString(count == 0 ? Msg::s()["game_start"] : fmt::sprintf("%d", count));
     _lbCountDown->runAction(Sequence::create(FadeIn::create(0.2), DelayTime::create(0.6), FadeOut::create(0.2), NULL));
     CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/count.mp3");
+}
+
+AssetInfo RunningScene::genNextAsset()
+{
+    static float chanceAll = Msg::s().getFloat("chance_all");
+    float atwhat = rand_0_1()*chanceAll;
+
+    AssetInfo info;
+    if (atwhat < Msg::s().getFloat("step_milk")) {
+        info.assetType = Asset::PROP;
+        info.propType = Prop::MILK;
+    } else if (atwhat < Msg::s().getFloat("step_redwine")) {
+        info.assetType = Asset::PROP;
+        info.propType = Prop::REDWINE;
+    } else if (atwhat < Msg::s().getFloat("step_xo")) {
+        info.assetType = Asset::PROP;
+        info.propType = Prop::XO;
+    } else if (atwhat < Msg::s().getFloat("step_magnet")) {
+        info.assetType = Asset::PROP;
+        info.propType = Prop::MAGNET;
+    } else if (atwhat < Msg::s().getFloat("step_shield")) {
+        info.assetType = Asset::PROP;
+        info.propType = Prop::SHIELD;
+    } else if (atwhat < Msg::s().getFloat("step_jingbi")) {
+        info.assetType = Asset::GOLD;
+    } else if (atwhat < Msg::s().getFloat("step_monster")){
+        info.assetType = Asset::MONSTER;
+    } else {
+        info.empty = true;
+    }
+    return info;
+}
+
+float RunningScene::genEnabelTime(int propType)
+{
+    return GameState::s()->getProp(propType)->getEnableTime();
 }
 

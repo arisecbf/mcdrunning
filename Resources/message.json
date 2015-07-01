@@ -41,6 +41,15 @@
     "scale_monster":2.0,
 
     "__comment__1":"下面是一些控制参数",
-    "asset_put_interval":3.0,
-    "asset_put_interval_random_scope":0.5
+    "asset_put_interval":1.0,
+    "asset_put_interval_random_scope":0.5,
+    "chance_milk":10,"step_milk":10,
+    "chance_redwine":10,"step_redwine":20,
+    "chance_xo":5,"step_xo":25,
+    "chance_magnet":10,"step_magnet":35,
+    "chance_shield":15,"step_shield":50,
+    "chance_jingbi":70,"step_jingbi":100,
+    "chance_monster":20,"step_monster":120,
+    "change_empty":50,"step_empty":170,
+    "chance_all":170
 }
