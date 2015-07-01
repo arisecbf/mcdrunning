@@ -26,10 +26,10 @@ namespace config
     const float default_turn_out_time = 0.2f;
     
     // Brand
-    const float default_logo_time = 0.3f;
+    const float default_logo_time = 0.6f;
     const std::vector<std::pair<std::string, float> > logoImages = {
         {"images/port_i6_first_party.png", default_logo_time},
-        {"images/port_i6.png", default_logo_time}
+        {"images/turnro_port_i6_v0.png", default_logo_time}
     };
     const float full_show = 0.6f;
 
