@@ -214,7 +214,7 @@ void RunningScene::update(float dt)
     }
 }
 
-static const float TOUCH_SCOPE = 80*80; // 触摸点中阈值
+static const float TOUCH_SCOPE = 80; // 触摸点中阈值
 static bool checkIfTouchOn(const Vec2& a, const Vec2& b){
     auto diff = a - b;
     return TOUCH_SCOPE > diff.x * diff.x + diff.y * diff.y;
@@ -222,17 +222,33 @@ static bool checkIfTouchOn(const Vec2& a, const Vec2& b){
 void RunningScene::checkAssetClick(const cocos2d::Vec2& loc)
 {
     CCLOG("touch loc %f %f", loc.x, loc.y);
-    for (auto iter = _assets.begin(); iter < _assets.end();) {
+    Asset selected;
+    float zMax = 500; // 决定asset多远时不能点击
+    bool have = false;
+    for (auto iter = _assets.begin(); iter != _assets.end();iter++) {
         auto propLoc = _3dCamera->project(iter->sprite->getPosition3D());
         CCLOG("prop %f %f", propLoc.x, propLoc.y);
         auto diff = loc - propLoc;
-        if (TOUCH_SCOPE > diff.x*diff.x + diff.y*diff.y) {
+        if (TOUCH_SCOPE > diff.length()) {
             // 点中了，从vec删除，然后进行后续动画。
+
             auto asset = *iter;
-            iter = _assets.erase(iter);
-            dealPickedAsset(asset);
-        } else {
-            iter++;
+            if (zMax < asset.sprite->getPosition3D().z) {
+                have = true;
+                zMax = asset.sprite->getPosition3D().z;
+                selected = asset;
+            }
+
+        }
+    }
+    if (have) {
+        dealPickedAsset(selected);
+        for (auto iter = _assets.begin(); iter != _assets.end() ;) {
+            if ((*iter).sprite == selected.sprite) {
+                iter = _assets.erase(iter);
+            } else {
+                iter++;
+            }
         }
     }
 }
