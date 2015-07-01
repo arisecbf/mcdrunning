@@ -16,6 +16,7 @@
 #include "SimpleAudioEngine.h"
 #include "ResultScene.h"
 #include "Msg.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -31,8 +32,7 @@ bool RunningScene::init()
     initGamePart();
     initUIPart();
 
-    scheduleUpdate();
-
+    startCountDown();
     return true;
 }
 
@@ -110,9 +110,6 @@ void RunningScene::initGamePart()
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-    addCommonBtn({.5f, .1f}, "test", [this](){
-        this->putAssetInGame(rand()%Asset::TMAX, rand()%Prop::TMAX);
-    });
 }
 
 void RunningScene::initUIPart()
@@ -129,8 +126,13 @@ void RunningScene::initUIPart()
     _2dUiLayer->addChild(_lbRoad);
 }
 
-static const int street_width = 20;
+void RunningScene::randomPutAssetInGame()
+{
+    // 在这里可以控制各asset的分配比例。
+    putAssetInGame(rand()%Asset::TMAX, rand()%Prop::TMAX);
+}
 
+static const int street_width = 20;
 void RunningScene::putAssetInGame(int type, int propType)
 {
     std::string meshFile;
@@ -212,6 +214,14 @@ void RunningScene::update(float dt)
 
         gameOver();
     }
+
+    // 放asset
+    _assetPutIntervalcost += dt;
+    if (_assetPutIntervalcost >= _assetPutInterval) {
+        randomPutAssetInGame();
+        _assetPutInterval = genNextPutInterval();
+        _assetPutIntervalcost = 0.f;
+    }
 }
 
 static const float TOUCH_SCOPE = 80; // 触摸点中阈值
@@ -290,9 +300,41 @@ void RunningScene::dealPickedAsset(const Asset& asset)
             break;
     }
 }
+void RunningScene::gameStart()
+{
+    _assetPutInterval = genNextPutInterval();
+    _assetPutIntervalcost = 0.f;
+    scheduleUpdate();
+}
 
 void RunningScene::gameOver()
 {
     Director::getInstance()->replaceScene(ResultScene::create(_loadLength, _cntProp, _cntMonster, _highestSpeed, _cntGold));
+}
+
+float RunningScene::genNextPutInterval()
+{
+    static float INTERVAL_INIT = Msg::s().getFloat("asset_put_interval");
+    static float INTERVAL_RANDOM_SCOPT = Msg::s().getFloat("asset_put_interval_random_scope");
+
+    return INTERVAL_INIT * (rand_0_1()*INTERVAL_RANDOM_SCOPT + 1.f - 0.5f*INTERVAL_RANDOM_SCOPT);
+}
+
+void RunningScene::startCountDown()
+{
+    _lbCountDown = Label::createWithTTF("", uic::font_en, 60);
+    _lbCountDown->setPosition(genPos({.5,.7}));
+    _defaultLayer->addChild(_lbCountDown);
+    showCountDown(3);
+    scheduleOnce([this](float){ this->showCountDown(2); }, 1.5f, "countdown 0");
+    scheduleOnce([this](float){ this->showCountDown(1); }, 2.75f, "countdown 1");
+    scheduleOnce([this](float){ this->showCountDown(0); this->gameStart(); }, 3.75f, "countdown 2");
+}
+
+void RunningScene::showCountDown(int count)
+{
+    _lbCountDown->setString(count == 0 ? Msg::s()["game_start"] : fmt::sprintf("%d", count));
+    _lbCountDown->runAction(Sequence::create(FadeIn::create(0.2), DelayTime::create(0.6), FadeOut::create(0.2), NULL));
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("sound/count.mp3");
 }
 

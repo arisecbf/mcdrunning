@@ -70,6 +70,7 @@ private:
     void checkAssetClick(const cocos2d::Vec2& loc);
     void dealPickedAsset(const Asset& asset);
     void putAssetInGame(int type, int propType);
+    void randomPutAssetInGame();
     int _cntProp = 0;
     int _cntMonster = 0;
     int _cntGold = 0;
@@ -89,8 +90,19 @@ private:
     float genAcceleterUp() { return 1.f; } // 加速时的加速度每秒
     float genAcceleterDown() { return 1.f; }
 
+    // 放asset的控制状态
+    float _assetPutInterval = 1.0f;
+    float _assetPutIntervalcost = 0.f;
+    float genNextPutInterval();
+
+    // 倒计时开始
+    void startCountDown();
+    void showCountDown(int count);
+    cocos2d::Label* _lbCountDown;
+
 
     void update(float dt)override;
+    void gameStart();
     void gameOver();
 };
 

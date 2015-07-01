@@ -8,6 +8,7 @@
     "select":"选择",
     "next":"下一个",
     "prev":"上一个",
+    "game_start":"start",
 
     "upgrade":"升级",
     "no_upgrade":"无法升级",
@@ -37,5 +38,9 @@
     "scale_xo":0.5,
     "scale_shield":0.5,
     "scale_magnet":0.5,
-    "scale_monster":2.0
+    "scale_monster":2.0,
+
+    "__comment__1":"下面是一些控制参数",
+    "asset_put_interval":3.0,
+    "asset_put_interval_random_scope":0.5
 }
